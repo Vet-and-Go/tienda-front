@@ -1,0 +1,170 @@
+
+.product-detail {
+    --pd-bg: var(--mlt-sys-color-white-2);
+    --pd-font-family: var(--mlt-sys-font-family-text);
+
+    // Gallery
+    --pd-gallery-bg: var(--mlt-sys-color-white-1);
+    --pd-gallery-border: 1px solid var(--mlt-sys-color-white-3);
+    --pd-gallery-radius: var(--mlt-sys-border-radius-8);
+    --pd-gallery-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+
+    // Info
+    --pd-title-color: var(--mlt-sys-color-neutral-dark-1);
+    --pd-price-color: var(--mlt-sys-color-alternative-5);
+    --pd-desc-color: var(--mlt-sys-color-neutral-dark-2);
+
+    // Tags
+    --pd-cat-bg: var(--mlt-sys-color-white-2);
+    --pd-cat-color: var(--mlt-sys-color-alternative-5);
+
+    // Stock
+    --pd-stock-ok-color: var(--mlt-sys-color-feedback-success);
+    --pd-stock-bad-color: var(--mlt-sys-color-feedback-error);
+
+    // Button
+    --pd-btn-bg: var(--mlt-sys-color-alternative-5);
+    --pd-btn-color: var(--mlt-sys-color-white-1);
+    --pd-btn-radius: var(--mlt-sys-border-radius-6);
+    --pd-btn-shadow: 0 10px 20px rgba(109, 150, 158, 0.3);
+
+    max-width: 1200px;
+    margin: var(--mlt-sys-margin-9) auto;
+    padding: 0 var(--mlt-sys-padding-7);
+    display: flex;
+    gap: 4rem;
+    align-items: flex-start;
+    font-family: var(--pd-font-family);
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    &__gallery {
+        flex: 1;
+        background: var(--pd-gallery-bg);
+        padding: 3rem;
+        border-radius: var(--pd-gallery-radius);
+        box-shadow: var(--pd-gallery-shadow);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: var(--pd-gallery-border);
+        width: 100%; // Ensure it takes full width in mobile column mode if necessary
+
+        img {
+            max-width: 100%;
+            height: auto;
+            max-height: 500px;
+            object-fit: contain;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.1));
+        }
+    }
+
+    &__info {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        padding-top: 1rem;
+    }
+
+    &__category {
+        color: var(--pd-cat-color);
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: var(--mlt-sys-font-size-2);
+        letter-spacing: 2px;
+        background: var(--pd-cat-bg);
+        padding: 0.5rem 1rem;
+        border-radius: 50px;
+        width: fit-content;
+    }
+
+    &__title {
+        font-size: 3rem;
+        font-weight: 800;
+        color: var(--pd-title-color);
+        margin: 0;
+        line-height: 1.1;
+    }
+
+    &__price {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: var(--pd-price-color);
+    }
+
+    &__description {
+        color: var(--pd-desc-color);
+        line-height: 1.8;
+        font-size: var(--mlt-sys-font-size-4);
+    }
+
+    &__stock {
+        font-size: var(--mlt-sys-font-size-3);
+
+        &--available {
+            color: var(--pd-stock-ok-color);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        &--out {
+            color: var(--pd-stock-bad-color);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+    }
+
+    &__actions {
+        margin-top: 1rem;
+        display: flex;
+        gap: 1.5rem;
+    }
+
+    &__add-btn {
+        background-color: var(--pd-btn-bg);
+        color: var(--pd-btn-color);
+        border: none;
+        padding: 1.25rem 2.5rem;
+        border-radius: var(--pd-btn-radius);
+        font-size: var(--mlt-sys-font-size-4);
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s;
+        flex: 1;
+        max-width: 400px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+        box-shadow: var(--pd-btn-shadow);
+
+        &:hover {
+            opacity: 0.9;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(109, 150, 158, 0.4);
+        }
+
+        &:disabled {
+            background-color: var(--mlt-sys-color-white-4);
+            box-shadow: none;
+            cursor: not-allowed;
+            transform: none;
+        }
+    }
+}
+
+.loading-state,
+.error-state {
+    text-align: center;
+    padding: 4rem;
+    font-size: 1.2rem;
+    color: var(--mlt-sys-color-white-6);
+}

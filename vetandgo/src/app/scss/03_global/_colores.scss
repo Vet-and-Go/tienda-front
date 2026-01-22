@@ -1,0 +1,18 @@
+@use '../01_utilities/index' as utilities;
+@use "sass:list";
+
+:root {
+  @each $nombre, $tonalidades in utilities.$colores {
+    @for $i from 1 through list.length($tonalidades) {
+      --mlt-sys-color-#{$nombre}-#{$i}: #{list.nth($tonalidades, $i)};
+    }
+  }
+}
+
+@each $nombre, $tonalidades in utilities.$colores {
+    @for $i from 1 through list.length($tonalidades) {
+    .g--color-#{$nombre}-#{$i}{
+      color: var(--mlt-sys-color-#{$nombre}-#{$i});
+    }
+  }
+}

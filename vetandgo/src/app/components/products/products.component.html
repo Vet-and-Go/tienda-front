@@ -1,0 +1,124 @@
+<div class="products">
+    <div class="products__hero">
+        <div class="products__hero-content">
+            <h1 class="products__hero-title">Nuestros Productos</h1>
+            <p class="products__hero-subtitle">Descubre los mejores productos para tu mascota</p>
+        </div>
+    </div>
+
+    <div class="products__container">
+        <!-- Sidebar / Categories -->
+        <aside class="products__sidebar">
+            <div class="products__sidebar-header">
+                <i class="fas fa-filter"></i>
+                <h2 class="products__sidebar-title">Categorías</h2>
+            </div>
+            <ul class="products__sidebar-list">
+                <li class="products__sidebar-item" [class.products__sidebar-item--active]="selectedCategoryId === null"
+                    (click)="onCategorySelect(null)">
+                    <div class="products__sidebar-content">
+                        <i class="fas fa-th-large"></i>
+                        <span>Todas</span>
+                    </div>
+                    @if (selectedCategoryId === null) {
+                    <span class="products__sidebar-check"><i class="fas fa-check"></i></span>
+                    }
+                </li>
+                @for (cat of categories; track cat.id) {
+                <li class="products__sidebar-item"
+                    [class.products__sidebar-item--active]="selectedCategoryId === cat.id"
+                    (click)="onCategorySelect(cat.id)">
+                    <div class="products__sidebar-content">
+                        @if (!cat.icon) {
+                        <i class="fas fa-paw"></i>
+                        }
+                        @if (cat.icon) {
+                        <i class="fas" [ngClass]="cat.icon"></i>
+                        }
+                        <span>{{ cat.name }}</span>
+                    </div>
+                    @if (selectedCategoryId === cat.id) {
+                    <span class="products__sidebar-check"><i class="fas fa-check"></i></span>
+                    }
+                </li>
+                }
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="products__main">
+            <!-- Top Controls: Sorting (and maybe pagination info) -->
+            <div class="products__toolbar">
+                <div class="products__results-count">
+                    <i class="fas fa-box-open"></i>
+                    <span>{{ totalElements }} productos encontrados</span>
+                </div>
+                <div class="products__sort">
+                    <label for="sort"><i class="fas fa-sort"></i> Ordenar:</label>
+                    <select id="sort" (change)="onSortChange($any($event.target).value)" [value]="currentSort">
+                        <option value="">Destacados</option>
+                        <option value="price,asc">Precio: Menor a Mayor</option>
+                        <option value="price,desc">Precio: Mayor a Menor</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Product Grid -->
+            @if (!isLoading) {
+            <div class="products__grid">
+                @for (product of products; track product.id) {
+                <div class="products__card" [routerLink]="['/products', product.id]">
+                    <div class="products__card-image">
+                        <img [src]="product.imageUrl || 'assets/placeholder-product.png'" alt="{{ product.name }}">
+                    </div>
+                    <div class="products__card-body">
+                        <h3 class="products__card-title">{{ product.name }}</h3>
+                        <div class="products__card-price">
+                            <span class="products__card-price-label">Precio</span>
+                            <span class="products__card-price-value">{{ product.price | currency:'EUR' }}</span>
+                        </div>
+                    </div>
+                </div>
+                }
+            </div>
+
+            @if (products.length === 0) {
+            <div class="products__no-results">
+                <i class="fas fa-search"></i>
+                <h3>No se encontraron productos</h3>
+                <p>Intenta con otra categoría o filtro</p>
+            </div>
+            }
+
+            @if (totalPages > 1) {
+            <div class="products__pagination">
+                <button class="products__pagination-btn products__pagination-btn--prev" [disabled]="currentPage === 1"
+                    (click)="onPageChange(currentPage - 1)">
+                    <i class="fas fa-chevron-left"></i>
+                    <span>Anterior</span>
+                </button>
+
+                <div class="products__pagination-pages">
+                    <span class="products__pagination-info">
+                        Página <strong>{{ currentPage }}</strong> de <strong>{{ totalPages }}</strong>
+                    </span>
+                </div>
+
+                <button class="products__pagination-btn products__pagination-btn--next" [disabled]="currentPage === totalPages"
+                    (click)="onPageChange(currentPage + 1)">
+                    <span>Siguiente</span>
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            }
+            } @else {
+            <div class="products__loading">
+                <div class="products__loading-spinner">
+                    <i class="fas fa-circle-notch fa-spin"></i>
+                </div>
+                <p>Cargando productos...</p>
+            </div>
+            }
+        </main>
+    </div>
+</div>

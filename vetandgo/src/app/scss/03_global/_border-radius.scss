@@ -1,0 +1,15 @@
+@use "sass:list";
+@use '../01_utilities/variables' as utilities;
+
+:root {
+  @for $i from 1 through length(utilities.$border-radius) {
+      $radius: list.nth(utilities.$border-radius, $i);
+      --mlt-sys-border-radius-#{$i}: #{$radius};
+  }
+}
+
+@for $i from 1 through length(utilities.$border-radius) {
+  .g--border-radius-#{$i - 1} {
+    border-radius: var(--mlt-sys-border-radius-#{$i}) !important;
+  }
+}

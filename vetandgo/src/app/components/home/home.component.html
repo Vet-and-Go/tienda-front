@@ -1,0 +1,64 @@
+<div class="home">
+    <!-- Main Content -->
+    <main class="home__main">
+
+        <!-- Hero Section -->
+        <section class="home__hero">
+            <h1>Cuidado Premium para tu Mascota</h1>
+            <p>Encuentra los mejores alimentos, juguetes y accesorios para consentir a tu mejor amigo. Calidad
+                garantizada y envío rápido.</p>
+            <a routerLink="/products" class="home__hero-cta">Ver Catálogo</a>
+        </section>
+
+        <!-- Categories -->
+        <h2 class="home__section-title">Categorías Populares</h2>
+        <div class="home__categories">
+            @for (cat of categories; track cat.id) {
+            <div class="home__category-card" (click)="onCategoryClick(cat.id)">
+                @if (cat.icon) {
+                <i class="fas" [ngClass]="cat.icon"></i>
+                } @else {
+                <i class="fas fa-paw"></i>
+                }
+                <h3>{{ cat.name }}</h3>
+            </div>
+            } @empty {
+            @if (isLoading) {
+            <p>Cargando categorías...</p>
+            } @else {
+            <!-- Fallback to static if none found -->
+            <div class="home__category-card" routerLink="/products">
+                <i class="fas fa-dog"></i>
+                <h3>Perros</h3>
+            </div>
+            }
+            }
+        </div>
+
+        <!-- Featured Products -->
+        <h2 class="home__section-title">Nuevos Productos</h2>
+        <div class="home__products">
+            @for (product of featuredProducts; track product.id) {
+            <div class="home__product-card" [routerLink]="['/products', product.id]">
+                <div class="home__product-card-image">
+                    <img [src]="product.imageUrl" [alt]="product.name">
+                </div>
+                <div class="home__product-card-info">
+                    <h3 class="home__product-card-title">{{ product.name }}</h3>
+                    <div class="home__product-card-price">{{ product.price | currency:'EUR' }}</div>
+                </div>
+                <div class="home__product-actions">
+                    <button class="home__add-cart-btn" (click)="addToCart($event, product)">Añadir al Carrito</button>
+                </div>
+            </div>
+            } @empty {
+            @if (isLoading) {
+            <p>Cargando productos destacados...</p>
+            } @else {
+            <p>No hay productos nuevos disponibles en este momento.</p>
+            }
+            }
+        </div>
+
+    </main>
+</div>

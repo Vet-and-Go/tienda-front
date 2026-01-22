@@ -1,0 +1,13 @@
+@use '../01_utilities/index' as utilities;
+
+:root {
+  @each $nombre, $valor in utilities.$typography {
+    --mlt-sys-#{$nombre}: #{$valor};
+  }
+}
+
+@each $nombre, $valor in utilities.$typography {
+  .g--#{$nombre} {
+    font-family: var(--mlt-sys-#{$nombre});
+  }
+}

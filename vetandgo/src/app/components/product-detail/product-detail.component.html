@@ -1,0 +1,57 @@
+@if (product) {
+<div class="product-detail">
+    <div class="product-detail__gallery">
+        <img [src]="product.imageUrl" alt="{{ product.name }}">
+    </div>
+
+    <div class="product-detail__info">
+        @if (product.category) {
+        <span class="product-detail__category">{{ product.category.name }}</span>
+        }
+        <h1 class="product-detail__title">{{ product.name }}</h1>
+        <div class="product-detail__price">{{ product.price | currency:'EUR' }}</div>
+
+        @if (product.description) {
+        <p class="product-detail__description">
+            {{ product.description }}
+        </p>
+        } @else {
+        <p class="product-detail__description">
+            Este producto no tiene una descripción detallada.
+        </p>
+        }
+
+        <div class="product-detail__stock">
+            @if (product.stock > 0) {
+            <span class="product-detail__stock--available">
+                <i class="fas fa-check-circle"></i> Disponibles: {{ product.stock }}
+            </span>
+            } @else {
+            <span class="product-detail__stock--out">
+                <i class="fas fa-times-circle"></i> Agotado
+            </span>
+            }
+        </div>
+
+        <div class="product-detail__actions">
+            <button class="product-detail__add-btn" [disabled]="product.stock <= 0" (click)="addToCart()">
+                <i class="fas" [ngClass]="isAdded ? 'fa-check' : 'fa-shopping-cart'"></i>
+                {{ isAdded ? '¡Añadido!' : 'Añadir al carrito' }}
+            </button>
+        </div>
+    </div>
+</div>
+} @else {
+@if (isLoading) {
+<div class="loading-state">
+    <p>Cargando información del producto...</p>
+</div>
+}
+@if (!isLoading && error) {
+<div class="error-state">
+    <p>{{ error }}</p>
+    <a routerLink="/products" style="color: var(--mlt-sys-color-primary-3); text-decoration: underline;">Volver al
+        catálogo</a>
+</div>
+}
+}

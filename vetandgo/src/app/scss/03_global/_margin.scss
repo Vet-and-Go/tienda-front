@@ -1,0 +1,27 @@
+@use "sass:list";
+@use '../01_utilities/variables' as utilities;
+
+:root {
+  @for $i from 1 through length(utilities.$margin) {
+      $margin:list.nth(utilities.$margin, $i);
+      --mlt-sys-margin-#{$i}: #{$margin};
+  }
+}
+
+@for $i from 1 through length(utilities.$margin) {
+  .g--margin-#{$i - 1} {
+    margin: var(--mlt-sys-margin-#{$i}) !important;
+  }
+  .g--margin-top-#{$i - 1} {
+    margin-top: var(--mlt-sys-margin-#{$i}) !important;
+  }
+  .g--margin-right-#{$i - 1} {
+    margin-right: var(--mlt-sys-margin-#{$i}) !important;
+  }
+  .g--margin-bottom-#{$i - 1} {
+    margin-bottom: var(--mlt-sys-margin-#{$i}) !important;
+  }
+  .g--margin-left-#{$i - 1} {
+    margin-left: var(--mlt-sys-margin-#{$i}) !important;
+  }
+}

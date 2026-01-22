@@ -270,6 +270,33 @@
             transform: translateY(-4px);
         }
 
+        &-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            z-index: 2;
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+
+            &--discount {
+                background: linear-gradient(135deg, #f56565, #ed8936);
+                color: white;
+                animation: pulse 2s infinite;
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
         &-image {
             width: 100%;
             height: 180px;
@@ -335,7 +362,17 @@
         &-price {
             display: flex;
             flex-direction: column;
-            gap: 0.25rem;
+            align-items: flex-start;
+            gap: 0.3rem;
+            margin-top: auto;
+
+            &-original {
+                font-size: 0.8rem;
+                color: #cbd5e0;
+                text-decoration: line-through;
+                font-weight: 500;
+                order: 1;
+            }
 
             &-label {
                 font-size: var(--mlt-sys-font-size-1);
@@ -346,10 +383,11 @@
             }
 
             &-value {
-                font-size: var(--mlt-sys-font-size-5);
-                font-weight: 800;
-                color: var(--products-item-active-color);
+                font-size: 1.3rem;
+                font-weight: 900;
+                color: #10b981;
                 line-height: 1;
+                order: 2;
             }
         }
     }

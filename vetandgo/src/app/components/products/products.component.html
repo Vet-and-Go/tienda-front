@@ -68,14 +68,21 @@
             <div class="products__grid">
                 @for (product of products; track product.id) {
                 <div class="products__card" [routerLink]="['/products', product.id]">
+                    @if (product.discount && product.discount > 0) {
+                    <div class="products__card-badge products__card-badge--discount">-{{ product.discount }}%</div>
+                    }
                     <div class="products__card-image">
                         <img [src]="product.imageUrl || 'assets/placeholder-product.png'" alt="{{ product.name }}">
                     </div>
                     <div class="products__card-body">
                         <h3 class="products__card-title">{{ product.name }}</h3>
                         <div class="products__card-price">
-                            <span class="products__card-price-label">Precio</span>
+                            @if (product.discount && product.discount > 0) {
+                            <span class="products__card-price-original">{{ product.price | currency:'EUR' }}</span>
+                            <span class="products__card-price-value">{{ getFinalPrice(product) | currency:'EUR' }}</span>
+                            } @else {
                             <span class="products__card-price-value">{{ product.price | currency:'EUR' }}</span>
+                            }
                         </div>
                     </div>
                 </div>

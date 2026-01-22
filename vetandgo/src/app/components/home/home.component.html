@@ -4,58 +4,143 @@
 
         <!-- Hero Section -->
         <section class="home__hero">
-            <h1>Cuidado Premium para tu Mascota</h1>
-            <p>Encuentra los mejores alimentos, juguetes y accesorios para consentir a tu mejor amigo. Calidad
-                garantizada y envío rápido.</p>
-            <a routerLink="/products" class="home__hero-cta">Ver Catálogo</a>
+            <div class="home__hero-pattern"></div>
+            <div class="home__hero-content">
+                <div class="home__hero-badge">🐾 Tu tienda de confianza</div>
+                <h1 class="home__hero-title">
+                    <span class="home__hero-title-main">Cuidado Premium</span>
+                    <span class="home__hero-title-sub">para tu Mascota</span>
+                </h1>
+                <p class="home__hero-text">Encuentra los mejores alimentos, juguetes y accesorios para consentir a tu mejor amigo. Calidad garantizada y envío rápido a toda España.</p>
+                <div class="home__hero-actions">
+                    <a routerLink="/products" class="home__hero-cta home__hero-cta--primary">
+                        <span>Ver Catálogo</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="home__hero-illustration">
+                <div class="home__hero-circle home__hero-circle--1"></div>
+                <div class="home__hero-circle home__hero-circle--2"></div>
+                <div class="home__hero-circle home__hero-circle--3"></div>
+            </div>
+        </section>
+
+        <!-- Benefits Section -->
+        <section class="home__benefits">
+            <div class="home__benefit">
+                <div class="home__benefit-icon">
+                    <i class="fas fa-shipping-fast"></i>
+                </div>
+                <h3 class="home__benefit-title">Envío Rápido</h3>
+                <p class="home__benefit-text">Entrega en 24-48h en toda España</p>
+            </div>
+            <div class="home__benefit">
+                <div class="home__benefit-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3 class="home__benefit-title">Garantía Total</h3>
+                <p class="home__benefit-text">100% satisfacción garantizada</p>
+            </div>
+            <div class="home__benefit">
+                <div class="home__benefit-icon">
+                    <i class="fas fa-headset"></i>
+                </div>
+                <h3 class="home__benefit-title">Soporte 24/7</h3>
+                <p class="home__benefit-text">Atención al cliente siempre disponible</p>
+            </div>
+            <div class="home__benefit">
+                <div class="home__benefit-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <h3 class="home__benefit-title">Con Amor</h3>
+                <p class="home__benefit-text">Productos seleccionados con cariño</p>
+            </div>
         </section>
 
         <!-- Categories -->
-        <h2 class="home__section-title">Categorías Populares</h2>
+        <h2 class="home__section-title">
+            <span class="home__section-title-text">Categorías Populares</span>
+            <span class="home__section-title-line"></span>
+        </h2>
         <div class="home__categories">
             @for (cat of categories; track cat.id) {
             <div class="home__category-card" (click)="onCategoryClick(cat.id)">
-                @if (cat.icon) {
-                <i class="fas" [ngClass]="cat.icon"></i>
-                } @else {
-                <i class="fas fa-paw"></i>
-                }
-                <h3>{{ cat.name }}</h3>
+                <div class="home__category-card-icon">
+                    <img [src]="'/img/categories/' + cat.id + '.jpg'" 
+                         [alt]="cat.name"
+                         (error)="onCategoryImageError($event, cat)">
+                </div>
+                <h3 class="home__category-card-title">{{ cat.name }}</h3>
+                <div class="home__category-card-arrow">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
             </div>
             } @empty {
             @if (isLoading) {
-            <p>Cargando categorías...</p>
+            <div class="home__loading">Cargando categorías...</div>
             } @else {
             <!-- Fallback to static if none found -->
             <div class="home__category-card" routerLink="/products">
-                <i class="fas fa-dog"></i>
-                <h3>Perros</h3>
+                <div class="home__category-card-icon">
+                    <i class="fas fa-dog"></i>
+                </div>
+                <h3 class="home__category-card-title">Perros</h3>
+                <div class="home__category-card-arrow">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
             </div>
             }
             }
         </div>
 
         <!-- Featured Products -->
-        <h2 class="home__section-title">Nuevos Productos</h2>
+        <h2 class="home__section-title">
+            <span class="home__section-title-text">✨ Nuevos Productos</span>
+            <span class="home__section-title-line"></span>
+        </h2>
         <div class="home__products">
             @for (product of featuredProducts; track product.id) {
             <div class="home__product-card" [routerLink]="['/products', product.id]">
+                @if (product.discount && product.discount > 0) {
+                <div class="home__product-badge home__product-badge--discount">-{{ product.discount }}%</div>
+                } @else {
+                <div class="home__product-badge">Nuevo</div>
+                }
                 <div class="home__product-card-image">
-                    <img [src]="product.imageUrl" [alt]="product.name">
+                    <img [src]="getProductImage(product)" 
+                         [alt]="product.name"
+                         (error)="onImageError($event)">
                 </div>
                 <div class="home__product-card-info">
                     <h3 class="home__product-card-title">{{ product.name }}</h3>
-                    <div class="home__product-card-price">{{ product.price | currency:'EUR' }}</div>
+                    <div class="home__product-card-price">
+                        @if (product.discount && product.discount > 0) {
+                        <span class="home__product-card-price-original">{{ product.price | currency:'EUR' }}</span>
+                        <span class="home__product-card-price-value">{{ getFinalPrice(product) | currency:'EUR' }}</span>
+                        } @else {
+                        <span class="home__product-card-price-value">{{ product.price | currency:'EUR' }}</span>
+                        }
+                    </div>
                 </div>
                 <div class="home__product-actions">
-                    <button class="home__add-cart-btn" (click)="addToCart($event, product)">Añadir al Carrito</button>
+                    <button class="home__add-cart-btn" (click)="addToCart($event, product)">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Añadir al Carrito</span>
+                    </button>
                 </div>
             </div>
             } @empty {
             @if (isLoading) {
-            <p>Cargando productos destacados...</p>
+            <div class="home__loading">
+                <i class="fas fa-spinner fa-spin"></i>
+                <span>Cargando productos destacados...</span>
+            </div>
             } @else {
-            <p>No hay productos nuevos disponibles en este momento.</p>
+            <div class="home__empty">
+                <i class="fas fa-box-open"></i>
+                <p>No hay productos nuevos disponibles en este momento.</p>
+            </div>
             }
             }
         </div>

@@ -9,7 +9,22 @@
         <span class="product-detail__category">{{ product.category.name }}</span>
         }
         <h1 class="product-detail__title">{{ product.name }}</h1>
-        <div class="product-detail__price">{{ product.price | currency:'EUR' }}</div>
+        
+        @if (product.discount && product.discount > 0) {
+        <div class="product-detail__discount-badge">
+            <i class="fas fa-tag"></i>
+            <span>¡{{ product.discount }}% de descuento!</span>
+        </div>
+        }
+        
+        <div class="product-detail__price">
+            @if (product.discount && product.discount > 0) {
+            <span class="product-detail__price-original">{{ product.price | currency:'EUR' }}</span>
+            <span class="product-detail__price-final">{{ getFinalPrice(product) | currency:'EUR' }}</span>
+            } @else {
+            <span class="product-detail__price-final">{{ product.price | currency:'EUR' }}</span>
+            }
+        </div>
 
         @if (product.description) {
         <p class="product-detail__description">

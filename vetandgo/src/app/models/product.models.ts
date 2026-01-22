@@ -13,6 +13,7 @@ export interface Product {
     stock: number;
     description?: string;
     imageUrl?: string;
+    discount?: number;
 }
 
 export interface Page<T> {

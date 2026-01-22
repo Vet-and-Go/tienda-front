@@ -57,4 +57,11 @@ export class ProductDetailComponent implements OnInit {
             setTimeout(() => this.isAdded = false, 2000);
         }
     }
+
+    getFinalPrice(product: Product): number {
+        if (product.discount && product.discount > 0) {
+            return product.price * (1 - product.discount / 100);
+        }
+        return product.price;
+    }
 }

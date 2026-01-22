@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
     categories: any[] = [];
     featuredProducts: Product[] = [];
     isLoading = true;
+    defaultImage = 'https://via.placeholder.com/300x300/e2e8f0/667eea?text=Producto';
 
     constructor(
         private productService: ProductService,
@@ -30,6 +31,30 @@ export class HomeComponent implements OnInit {
     addToCart(event: Event, product: Product): void {
         event.stopPropagation(); // Prevent navigation to detail
         this.cartService.addToCart(product);
+    }
+
+    onImageError(event: any): void {
+        event.target.src = this.defaultImage;
+    }
+
+    onCategoryImageError(event: any, category: any): void {
+        // If image fails, show icon as fallback
+        const iconElement = document.createElement('i');
+        iconElement.className = 'fas fa-paw';
+        iconElement.style.fontSize = '3rem';
+        iconElement.style.color = '#667eea';
+        event.target.replaceWith(iconElement);
+    }
+
+    getProductImage(product: Product): string {
+        return product.imageUrl || this.defaultImage;
+    }
+
+    getFinalPrice(product: Product): number {
+        if (product.discount && product.discount > 0) {
+            return product.price * (1 - product.discount / 100);
+        }
+        return product.price;
     }
 
     loadData(): void {

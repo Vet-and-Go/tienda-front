@@ -67,6 +67,13 @@ export class ProductsComponent implements OnInit {
         this.cartService.addToCart(product);
     }
 
+    getFinalPrice(product: Product): number {
+        if (product.discount && product.discount > 0) {
+            return product.price * (1 - product.discount / 100);
+        }
+        return product.price;
+    }
+
     loadProducts(): void {
         this.isLoading = true;
         this.productService.getProducts(

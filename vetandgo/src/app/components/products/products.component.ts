@@ -1,5 +1,6 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { ProductService } from '../../core/services/product/product.service';
 import { CartService } from '../../core/services/cart/cart.service';
 import { Product, Page } from '../../models/product.models';
@@ -8,7 +9,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 @Component({
     selector: 'app-products',
     standalone: true,
-    imports: [CommonModule, RouterLink],
+    imports: [CommonModule, RouterLink, FormsModule],
     templateUrl: './products.component.html',
     styleUrls: ['./products.component.scss']
 })
@@ -21,6 +22,7 @@ export class ProductsComponent implements OnInit {
     totalElements = 0;
     currentSort = '';
     currentKeyword = '';
+    searchKeyword = '';
 
     isLoading = false;
 
@@ -43,6 +45,7 @@ export class ProductsComponent implements OnInit {
             this.selectedCategoryId = params['categoryId'] ? Number(params['categoryId']) : null;
             this.currentSort = params['sort'] || '';
             this.currentKeyword = params['search'] || '';
+            this.searchKeyword = this.currentKeyword;
 
             this.loadProducts();
         });
@@ -72,6 +75,28 @@ export class ProductsComponent implements OnInit {
             return product.price * (1 - product.discount / 100);
         }
         return product.price;
+    }
+
+    getResultsText(): string {
+        const showing = this.products.length;
+        const total = this.totalElements;
+        const categoryName = this.getSelectedCategoryName();
+        
+        if (this.currentKeyword) {
+            return `Mostrando ${showing} de ${total} resultados para "${this.currentKeyword}"`;
+        }
+        
+        if (categoryName) {
+            return `Mostrando ${showing} de ${total} productos en ${categoryName}`;
+        }
+        
+        return `Mostrando ${showing} de ${total} productos`;
+    }
+
+    getSelectedCategoryName(): string | null {
+        if (!this.selectedCategoryId) return null;
+        const category = this.categories.find(cat => cat.id === this.selectedCategoryId);
+        return category ? category.name : null;
     }
 
     loadProducts(): void {
@@ -150,5 +175,25 @@ export class ProductsComponent implements OnInit {
             relativeTo: this.route,
             queryParams: queryParams,
         });
+    }
+
+    onSearch(): void {
+        this.currentKeyword = this.searchKeyword.trim();
+        this.currentPage = 1;
+        this.updateUrl();
+    }
+
+    onSearchInput(): void {
+        // Optional: implement debounce for live search
+        if (!this.searchKeyword.trim()) {
+            this.clearSearch();
+        }
+    }
+
+    clearSearch(): void {
+        this.searchKeyword = '';
+        this.currentKeyword = '';
+        this.currentPage = 1;
+        this.updateUrl();
     }
 }

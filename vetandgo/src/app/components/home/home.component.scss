@@ -262,11 +262,7 @@
         transition: all 0.3s;
         border: 1px solid rgba(0, 0, 0, 0.05);
 
-        &:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.15);
-        }
-
+        
         &-icon {
             width: 70px;
             height: 70px;
@@ -372,8 +368,8 @@
         }
 
         &-icon {
-            width: 90px;
-            height: 90px;
+            width: 200px;
+            height: 200px;
             margin: 0 auto 1.5rem;
             background: linear-gradient(135deg, #667eea15, #764ba215);
             border-radius: 20px;
@@ -391,7 +387,7 @@
             }
 
             i {
-                font-size: 3rem;
+                font-size: 3.5rem;
                 color: var(--home-card-icon-color);
             }
         }

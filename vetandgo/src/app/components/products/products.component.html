@@ -51,10 +51,16 @@
             <div class="products__toolbar">
                 <div class="products__results-count">
                     <i class="fas fa-box-open"></i>
-                    <span>{{ totalElements }} productos encontrados</span>
+                    <span>{{ getResultsText() }}</span>
+                </div>
+                <div class="products__search">
+                    <input type="text" [(ngModel)]="searchKeyword" placeholder="Buscar productos..." (keyup.enter)="onSearch()">
+                    <button (click)="onSearch()">
+                        <span class="search-icon">🔍</span>
+                    </button>
                 </div>
                 <div class="products__sort">
-                    <label for="sort"><i class="fas fa-sort"></i> Ordenar:</label>
+                    <label for="sort"><i class="fas fa-sliders-h"></i> Ordenar:</label>
                     <select id="sort" (change)="onSortChange($any($event.target).value)" [value]="currentSort">
                         <option value="">Destacados</option>
                         <option value="price,asc">Precio: Menor a Mayor</option>

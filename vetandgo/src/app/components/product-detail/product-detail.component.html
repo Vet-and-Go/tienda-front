@@ -10,19 +10,23 @@
         }
         <h1 class="product-detail__title">{{ product.name }}</h1>
         
-        @if (product.discount && product.discount > 0) {
+        @if (product.discountPercentage > 0) {
         <div class="product-detail__discount-badge">
             <i class="fas fa-tag"></i>
-            <span>¡{{ product.discount }}% de descuento!</span>
+            <span>¡{{ product.discountPercentage }}% de descuento!</span>
         </div>
         }
         
         <div class="product-detail__price">
-            @if (product.discount && product.discount > 0) {
-            <span class="product-detail__price-original">{{ product.price | currency:'EUR' }}</span>
-            <span class="product-detail__price-final">{{ getFinalPrice(product) | currency:'EUR' }}</span>
+            @if (product.discountPercentage > 0) {
+            <span class="product-detail__price-original">{{ product.basePrice | currency:'EUR' }}</span>
+            <span class="product-detail__price-final">{{ product.finalPrice | currency:'EUR' }}</span>
+            <div class="product-detail__savings">
+                <i class="fas fa-piggy-bank"></i>
+                Ahorras: {{ getSavings() | currency:'EUR' }}
+            </div>
             } @else {
-            <span class="product-detail__price-final">{{ product.price | currency:'EUR' }}</span>
+            <span class="product-detail__price-final">{{ product.finalPrice | currency:'EUR' }}</span>
             }
         </div>
 

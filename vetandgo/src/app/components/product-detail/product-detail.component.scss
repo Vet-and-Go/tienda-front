@@ -120,24 +120,39 @@
 
     &__price {
         display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5rem;
+        align-items: baseline;
+        gap: 0.75rem;
+        flex-wrap: wrap;
 
         &-original {
-            font-size: 1.2rem;
+            font-size: 1rem;
             font-weight: 500;
-            color: #cbd5e0;
+            color: #999;
             text-decoration: line-through;
-            order: 1;
         }
 
         &-final {
-            font-size: 2rem;
-            font-weight: 900;
-            color: #10b981;
-            order: 2;
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: #e74c3c;
             line-height: 1;
+        }
+    }
+
+    &__savings {
+        color: #27ae60;
+        font-size: 0.9rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        background: rgba(39, 174, 96, 0.1);
+        border-radius: 8px;
+        width: fit-content;
+
+        i {
+            font-size: 1rem;
         }
     }
 

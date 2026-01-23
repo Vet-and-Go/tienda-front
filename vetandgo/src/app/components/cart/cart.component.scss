@@ -102,11 +102,41 @@
             margin: 0;
         }
 
+        &-price-container {
+            display: flex;
+            align-items: baseline;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+        }
+
+        &-price-old {
+            font-size: 0.8rem;
+            color: #999;
+            text-decoration: line-through;
+            font-weight: 500;
+        }
+
         &-price {
-            font-size: var(--mlt-sys-font-size-3);
-            color: var(--cart-item-price-color);
-            font-weight: 600;
+            font-size: 1rem;
+            color: #e74c3c;
+            font-weight: 700;
             margin: 0;
+        }
+
+        &-discount-badge {
+            background-color: #e74c3c;
+            color: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+
+        &-subtotal {
+            font-size: 0.85rem;
+            color: #27ae60;
+            font-weight: 700;
+            margin: 0.5rem 0 0 0;
         }
 
         &-quantity {

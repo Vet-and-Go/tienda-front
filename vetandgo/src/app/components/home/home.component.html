@@ -102,8 +102,8 @@
         <div class="home__products">
             @for (product of featuredProducts; track product.id) {
             <div class="home__product-card" [routerLink]="['/products', product.id]">
-                @if (product.discount && product.discount > 0) {
-                <div class="home__product-badge home__product-badge--discount">-{{ product.discount }}%</div>
+                @if (product.discountPercentage > 0) {
+                <div class="home__product-badge home__product-badge--discount">-{{ product.discountPercentage }}%</div>
                 } @else {
                 <div class="home__product-badge">Nuevo</div>
                 }
@@ -115,11 +115,11 @@
                 <div class="home__product-card-info">
                     <h3 class="home__product-card-title">{{ product.name }}</h3>
                     <div class="home__product-card-price">
-                        @if (product.discount && product.discount > 0) {
-                        <span class="home__product-card-price-original">{{ product.price | currency:'EUR' }}</span>
-                        <span class="home__product-card-price-value">{{ getFinalPrice(product) | currency:'EUR' }}</span>
+                        @if (product.discountPercentage > 0) {
+                        <span class="home__product-card-price-original">{{ product.basePrice | currency:'EUR' }}</span>
+                        <span class="home__product-card-price-value">{{ product.finalPrice | currency:'EUR' }}</span>
                         } @else {
-                        <span class="home__product-card-price-value">{{ product.price | currency:'EUR' }}</span>
+                        <span class="home__product-card-price-value">{{ product.finalPrice | currency:'EUR' }}</span>
                         }
                     </div>
                 </div>

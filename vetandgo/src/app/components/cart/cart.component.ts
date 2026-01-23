@@ -21,7 +21,8 @@ export class CartComponent implements OnInit {
 
     ngOnInit(): void {
         this.cartItems$.subscribe(items => {
-            this.totalPrice = items.reduce((acc, item) => acc + (item.product.price * item.quantity), 0);
+            // IMPORTANTE: Usar finalPrice para cálculos, nunca basePrice
+            this.totalPrice = items.reduce((acc, item) => acc + (item.product.finalPrice * item.quantity), 0);
         });
     }
 

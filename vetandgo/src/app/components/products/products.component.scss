@@ -411,34 +411,42 @@
 
         &-price {
             display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 0.3rem;
+            align-items: baseline;
+            gap: 0.5rem;
             margin-top: auto;
+            flex-wrap: wrap;
 
-            &-original {
-                font-size: 0.8rem;
-                color: #cbd5e0;
+            // Precio antiguo tachado (cuando hay descuento)
+            &-old {
+                font-size: 0.75rem;
+                color: #999;
                 text-decoration: line-through;
                 font-weight: 500;
-                order: 1;
             }
 
-            &-label {
-                font-size: var(--mlt-sys-font-size-1);
-                color: var(--mlt-sys-color-neutral-dark-2);
-                font-weight: 500;
-                text-transform: uppercase;
-                letter-spacing: 0.5px;
-            }
-
-            &-value {
-                font-size: 1.3rem;
-                font-weight: 900;
-                color: #10b981;
+            // Precio nuevo con descuento (destacado)
+            &-new {
+                font-size: 1.1rem;
+                font-weight: 800;
+                color: #e74c3c;
                 line-height: 1;
-                order: 2;
             }
+
+            // Precio regular (sin descuento)
+            &-value {
+                font-size: 1.1rem;
+                font-weight: 800;
+                color: #2c3e50;
+                line-height: 1;
+            }
+        }
+
+        // Texto de ahorro
+        &-savings {
+            color: #27ae60;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-top: 0.25rem;
         }
     }
 

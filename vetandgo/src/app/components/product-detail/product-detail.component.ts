@@ -58,10 +58,15 @@ export class ProductDetailComponent implements OnInit {
         }
     }
 
-    getFinalPrice(product: Product): number {
-        if (product.discount && product.discount > 0) {
-            return product.price * (1 - product.discount / 100);
+    // Ya no es necesario calcular el precio final, viene del backend
+    hasDiscount(): boolean {
+        return this.product?.discountPercentage ? this.product.discountPercentage > 0 : false;
+    }
+
+    getSavings(): number {
+        if (this.product && this.hasDiscount()) {
+            return this.product.basePrice - this.product.finalPrice;
         }
-        return product.price;
+        return 0;
     }
 }

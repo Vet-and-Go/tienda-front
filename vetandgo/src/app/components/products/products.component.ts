@@ -70,12 +70,7 @@ export class ProductsComponent implements OnInit {
         this.cartService.addToCart(product);
     }
 
-    getFinalPrice(product: Product): number {
-        if (product.discount && product.discount > 0) {
-            return product.price * (1 - product.discount / 100);
-        }
-        return product.price;
-    }
+    
 
     getResultsText(): string {
         const showing = this.products.length;
@@ -137,8 +132,7 @@ export class ProductsComponent implements OnInit {
     get totalPages(): number {
         const calculatedPages = Math.ceil(this.totalElements / this.pageSize);
 
-        // Backend might return total unfiltered count despite pagination returning filtered results.
-        // Heuristic: If the current page result is smaller than page size, it implies we are on the last page.
+        
         if (this.products.length < this.pageSize && this.products.length > 0) {
             return this.currentPage;
         }

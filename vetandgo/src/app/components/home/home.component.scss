@@ -496,25 +496,23 @@
 
         &-price {
             display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 0.3rem;
+            align-items: baseline;
+            gap: 0.5rem;
             margin-top: auto;
+            flex-wrap: wrap;
 
             &-original {
-                font-size: 0.85rem;
+                font-size: 0.75rem;
                 font-weight: 500;
-                color: #cbd5e0;
+                color: #999;
                 text-decoration: line-through;
-                order: 1;
             }
 
             &-value {
-                font-size: 1.4rem;
-                font-weight: 900;
-                color: #10b981;
+                font-size: 1.1rem;
+                font-weight: 800;
+                color: #e74c3c;
                 line-height: 1;
-                order: 2;
             }
         }
     }

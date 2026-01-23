@@ -74,8 +74,8 @@
             <div class="products__grid">
                 @for (product of products; track product.id) {
                 <div class="products__card" [routerLink]="['/products', product.id]">
-                    @if (product.discount && product.discount > 0) {
-                    <div class="products__card-badge products__card-badge--discount">-{{ product.discount }}%</div>
+                    @if (product.discountPercentage > 0) {
+                    <div class="products__card-badge products__card-badge--discount">-{{ product.discountPercentage }}%</div>
                     }
                     <div class="products__card-image">
                         <img [src]="product.imageUrl || 'assets/placeholder-product.png'" alt="{{ product.name }}">
@@ -83,13 +83,18 @@
                     <div class="products__card-body">
                         <h3 class="products__card-title">{{ product.name }}</h3>
                         <div class="products__card-price">
-                            @if (product.discount && product.discount > 0) {
-                            <span class="products__card-price-original">{{ product.price | currency:'EUR' }}</span>
-                            <span class="products__card-price-value">{{ getFinalPrice(product) | currency:'EUR' }}</span>
+                            @if (product.discountPercentage > 0) {
+                            <span class="products__card-price-old">{{ product.basePrice | currency:'EUR' }}</span>
+                            <span class="products__card-price-new">{{ product.finalPrice | currency:'EUR' }}</span>
                             } @else {
-                            <span class="products__card-price-value">{{ product.price | currency:'EUR' }}</span>
+                            <span class="products__card-price-value">{{ product.finalPrice | currency:'EUR' }}</span>
                             }
                         </div>
+                        @if (product.discountPercentage > 0) {
+                        <div class="products__card-savings">
+                            Ahorras: {{ product.basePrice - product.finalPrice | currency:'EUR' }}
+                        </div>
+                        }
                     </div>
                 </div>
                 }

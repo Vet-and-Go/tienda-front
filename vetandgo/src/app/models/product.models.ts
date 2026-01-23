@@ -9,10 +9,14 @@ export interface Product {
     id: number;
     name: string;
     category?: Category;
-    price: number;
+    basePrice: number;           // Precio original/sin descuento
+    finalPrice: number;          // Precio con descuento aplicado (USAR PARA PAGOS)
+    discountPercentage: number;  // Porcentaje de descuento (0 = sin descuento)
     stock: number;
     description?: string;
     imageUrl?: string;
+    // Deprecated: mantener para compatibilidad temporal
+    price?: number;
     discount?: number;
 }
 

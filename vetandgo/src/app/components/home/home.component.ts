@@ -50,11 +50,9 @@ export class HomeComponent implements OnInit {
         return product.imageUrl || this.defaultImage;
     }
 
-    getFinalPrice(product: Product): number {
-        if (product.discount && product.discount > 0) {
-            return product.price * (1 - product.discount / 100);
-        }
-        return product.price;
+    // No es necesario calcular, el backend ya envía finalPrice
+    hasDiscount(product: Product): boolean {
+        return product.discountPercentage > 0;
     }
 
     loadData(): void {

@@ -13,12 +13,21 @@
                     </div>
                     <div class="cart__item-details">
                         <h3 class="cart__item-name">{{ item.product.name }}</h3>
-                        <p class="cart__item-price">{{ item.product.price | currency:'EUR' }}</p>
+                        @if (item.product.discountPercentage > 0) {
+                        <div class="cart__item-price-container">
+                            <span class="cart__item-price-old">{{ item.product.basePrice | currency:'EUR' }}</span>
+                            <span class="cart__item-price">{{ item.product.finalPrice | currency:'EUR' }}</span>
+                            <span class="cart__item-discount-badge">-{{ item.product.discountPercentage }}%</span>
+                        </div>
+                        } @else {
+                        <p class="cart__item-price">{{ item.product.finalPrice | currency:'EUR' }}</p>
+                        }
                         <div class="cart__item-quantity">
                             <button (click)="decreaseQuantity(item.product.id)" class="cart__qty-btn">-</button>
                             <span class="cart__qty-num">{{ item.quantity }}</span>
                             <button (click)="increaseQuantity(item.product.id)" class="cart__qty-btn">+</button>
                         </div>
+                        <p class="cart__item-subtotal">Subtotal: {{ item.product.finalPrice * item.quantity | currency:'EUR' }}</p>
                     </div>
                     <button class="cart__remove-btn" (click)="removeItem(item.product.id)" title="Eliminar">
                         <i class="fas fa-trash-alt"></i>

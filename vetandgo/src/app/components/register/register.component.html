@@ -1,0 +1,51 @@
+<div class="register">
+    <div class="register__container">
+        <div class="register__header">
+            <h1 class="register__title">VetandGo</h1>
+            <p class="register__subtitle">Crea tu cuenta</p>
+        </div>
+
+        @if (errorMessage) {
+        <div class="register__error">
+            {{ errorMessage }}
+        </div>
+        }
+
+        <form class="register__form" (ngSubmit)="onSubmit()">
+            <div class="register__field">
+                <label for="username" class="register__label">Usuario</label>
+                <input type="text" id="username" name="username" class="register__input" [(ngModel)]="username"
+                    placeholder="Ingresa tu usuario" [disabled]="isLoading" required />
+            </div>
+
+            <div class="register__field">
+                <label for="password" class="register__label">Contraseña</label>
+                <input type="password" id="password" name="password" class="register__input" [(ngModel)]="password"
+                    placeholder="Ingresa tu contraseña" [disabled]="isLoading" required />
+            </div>
+
+            <div class="register__field">
+                <label for="confirmPassword" class="register__label">Confirmar Contraseña</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" class="register__input"
+                    [(ngModel)]="confirmPassword" placeholder="Confirma tu contraseña" [disabled]="isLoading"
+                    required />
+            </div>
+
+            <div class="register__actions">
+                <button type="submit" class="register__button" [class.register__button--loading]="isLoading"
+                    [disabled]="isLoading">
+                    @if (isLoading) {
+                    <span class="register__button-spinner"></span>
+                    <span>Registrando...</span>
+                    } @else {
+                    <span>Registrarse</span>
+                    }
+                </button>
+            </div>
+
+            <div class="register__footer">
+                <p>¿Ya tienes cuenta? <a routerLink="/login" class="register__link">Inicia sesión</a></p>
+            </div>
+        </form>
+    </div>
+</div>

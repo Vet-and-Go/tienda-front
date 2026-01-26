@@ -1,0 +1,27 @@
+@use "sass:list";
+@use '../01_utilities/variables' as utilities;
+
+:root {
+  @for $i from 1 through length(utilities.$padding) {
+      $utility:list.nth(utilities.$padding, $i);
+      --mlt-sys-padding-#{$i}: #{$utility};
+  }
+}
+
+@for $i from 1 through length(utilities.$padding) {
+  .g--padding-#{$i - 1} {
+    padding: var(--mlt-sys-padding-#{$i}) !important;
+  }
+  .g--padding-top-#{$i - 1} {
+    padding-top: var(--mlt-sys-padding-#{$i}) !important;
+  }
+  .g--padding-right-#{$i - 1} {
+    padding-right: var(--mlt-sys-padding-#{$i}) !important;
+  }
+  .g--padding-bottom-#{$i - 1} {
+    padding-bottom: var(--mlt-sys-padding-#{$i}) !important;
+  }
+  .g--padding-left-#{$i - 1} {
+    padding-left: var(--mlt-sys-padding-#{$i}) !important;
+  }
+}

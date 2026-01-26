@@ -1,0 +1,44 @@
+<div class="login">
+    <div class="login__container">
+        <div class="login__header">
+            <h1 class="login__title">VetandGo ADM</h1>
+            <p class="login__subtitle">Inicia sesión para continuar</p>
+        </div>
+
+        @if (errorMessage) {
+        <div class="login__error">
+            {{ errorMessage }}
+        </div>
+        }
+
+        <form class="login__form" (ngSubmit)="onSubmit()">
+            <div class="login__field">
+                <label for="username" class="login__label">Usuario</label>
+                <input type="text" id="username" name="username" class="login__input" [(ngModel)]="username"
+                    placeholder="Ingresa tu usuario" [disabled]="isLoading" required />
+            </div>
+
+            <div class="login__field">
+                <label for="password" class="login__label">Contraseña</label>
+                <input type="password" id="password" name="password" class="login__input" [(ngModel)]="password"
+                    placeholder="Ingresa tu contraseña" [disabled]="isLoading" required />
+            </div>
+
+            <div class="login__actions">
+                <button type="submit" class="login__button" [class.login__button--loading]="isLoading"
+                    [disabled]="isLoading">
+                    @if (isLoading) {
+                    <span class="login__button-spinner"></span>
+                    <span>Iniciando sesión...</span>
+                    } @else {
+                    <span>Iniciar Sesión</span>
+                    }
+                </button>
+            </div>
+
+            <div class="login__footer">
+                <p>¿No tienes cuenta? <a routerLink="/register" class="login__link">Regístrate</a></p>
+            </div>
+        </form>
+    </div>
+</div>

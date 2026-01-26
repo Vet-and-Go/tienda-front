@@ -1,0 +1,32 @@
+<header class="header">
+    <a routerLink="/" class="header__logo">Vet<span style="color: var(--mlt-sys-color-alternative-5);">&</span>Go</a>
+
+    <nav class="header__nav">
+        <a routerLink="/home">Inicio</a>
+        <a routerLink="/products">Productos</a>
+
+        <!-- Search Bar -->
+        <div class="header__search">
+            <input type="text" [(ngModel)]="searchKeyword" placeholder="Buscar productos..." (keyup.enter)="onSearch()">
+            <button (click)="onSearch()">
+                <span class="search-icon">🔍</span>
+            </button>
+        </div>
+
+        @if (currentUser) {
+        <div style="display: flex; gap: 1rem; align-items: center;">
+            <span style="font-weight: 600;">Hol@, {{ currentUser.username }}</span>
+            <button (click)="logout()" class="header__auth-btn header__auth-btn--login">Salir</button>
+        </div>
+        } @else {
+        <a routerLink="/login" class="header__auth-btn header__auth-btn--login">Ingresar</a>
+        <a routerLink="/register" class="header__auth-btn header__auth-btn--register">Registrarse</a>
+        }
+
+        <!-- Cart Icon -->
+        <a routerLink="/cart" class="header__cart" title="Carrito de compras">
+            <span class="header__cart-icon">🛒</span>
+            <span class="header__cart-count">{{ cartCount }}</span>
+        </a>
+    </nav>
+</header>

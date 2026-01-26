@@ -1,0 +1,76 @@
+@if (product) {
+<div class="product-detail">
+    <div class="product-detail__gallery">
+        <img [src]="product.imageUrl" alt="{{ product.name }}">
+    </div>
+
+    <div class="product-detail__info">
+        @if (product.category) {
+        <span class="product-detail__category">{{ product.category.name }}</span>
+        }
+        <h1 class="product-detail__title">{{ product.name }}</h1>
+        
+        @if (product.discountPercentage > 0) {
+        <div class="product-detail__discount-badge">
+            <i class="fas fa-tag"></i>
+            <span>¡{{ product.discountPercentage }}% de descuento!</span>
+        </div>
+        }
+        
+        <div class="product-detail__price">
+            @if (product.discountPercentage > 0) {
+            <span class="product-detail__price-original">{{ product.basePrice | currency:'EUR' }}</span>
+            <span class="product-detail__price-final">{{ product.finalPrice | currency:'EUR' }}</span>
+            <div class="product-detail__savings">
+                <i class="fas fa-piggy-bank"></i>
+                Ahorras: {{ getSavings() | currency:'EUR' }}
+            </div>
+            } @else {
+            <span class="product-detail__price-final">{{ product.finalPrice | currency:'EUR' }}</span>
+            }
+        </div>
+
+        @if (product.description) {
+        <p class="product-detail__description">
+            {{ product.description }}
+        </p>
+        } @else {
+        <p class="product-detail__description">
+            Este producto no tiene una descripción detallada.
+        </p>
+        }
+
+        <div class="product-detail__stock">
+            @if (product.stock > 0) {
+            <span class="product-detail__stock--available">
+                <i class="fas fa-check-circle"></i> Disponibles: {{ product.stock }}
+            </span>
+            } @else {
+            <span class="product-detail__stock--out">
+                <i class="fas fa-times-circle"></i> Agotado
+            </span>
+            }
+        </div>
+
+        <div class="product-detail__actions">
+            <button class="product-detail__add-btn" [disabled]="product.stock <= 0" (click)="addToCart()">
+                <i class="fas" [ngClass]="isAdded ? 'fa-check' : 'fa-shopping-cart'"></i>
+                {{ isAdded ? '¡Añadido!' : 'Añadir al carrito' }}
+            </button>
+        </div>
+    </div>
+</div>
+} @else {
+@if (isLoading) {
+<div class="loading-state">
+    <p>Cargando información del producto...</p>
+</div>
+}
+@if (!isLoading && error) {
+<div class="error-state">
+    <p>{{ error }}</p>
+    <a routerLink="/products" style="color: var(--mlt-sys-color-primary-3); text-decoration: underline;">Volver al
+        catálogo</a>
+</div>
+}
+}

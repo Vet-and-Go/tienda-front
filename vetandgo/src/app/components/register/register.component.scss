@@ -1,0 +1,201 @@
+.register {
+    --register-background: var(--mlt-sys-color-white-2);
+    --register-container-background: var(--mlt-sys-color-white-1);
+    --register-container-border-radius: var(--mlt-sys-border-radius-6);
+    --register-container-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    --register-container-padding: var(--mlt-sys-padding-12) var(--mlt-sys-padding-11);
+    --register-container-max-width: var(--mlt-sys-width-11);
+    --register-title-color: var(--mlt-sys-color-alternative-5);
+    --register-subtitle-color: var(--mlt-sys-color-white-5);
+    --register-label-color: var(--mlt-sys-color-white-8);
+    --register-input-border-color: var(--mlt-sys-color-white-2);
+    --register-input-border-color-focus: var(--mlt-sys-color-alternative-4);
+    --register-input-background: var(--mlt-sys-color-white-1);
+    --register-input-placeholder-color: var(--mlt-sys-color-white-4);
+    --register-error-background: var(--mlt-sys-color-button-primary-10);
+    --register-error-border: var(--mlt-sys-color-button-primary-8);
+    --register-error-color: var(--mlt-sys-color-button-primary-1);
+    --register-font-family-title: var(--mlt-sys-font-family-title);
+    --register-font-family-text: var(--mlt-sys-font-family-text);
+
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--register-background);
+    padding: var(--mlt-sys-padding-8);
+
+    &__container {
+        width: 100%;
+        max-width: var(--register-container-max-width);
+        background: var(--register-container-background);
+        border-radius: var(--register-container-border-radius);
+        box-shadow: var(--register-container-shadow);
+        padding: var(--register-container-padding);
+    }
+
+    &__header {
+        text-align: center;
+        margin-bottom: var(--mlt-sys-margin-11);
+    }
+
+    &__title {
+        font-size: var(--mlt-sys-font-size-8);
+        font-weight: 700;
+        color: var(--register-title-color);
+        margin: 0 0 var(--mlt-sys-margin-4) 0;
+        font-family: var(--register-font-family-title);
+    }
+
+    &__subtitle {
+        font-size: var(--mlt-sys-font-size-3);
+        color: var(--register-subtitle-color);
+        margin: 0;
+        font-family: var(--register-font-family-text);
+    }
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+        gap: var(--mlt-sys-padding-9);
+    }
+
+    &__error {
+        background-color: var(--register-error-background);
+        border: 1px solid var(--register-error-border);
+        color: var(--register-error-color);
+        padding: var(--mlt-sys-padding-6) var(--mlt-sys-padding-7);
+        border-radius: var(--mlt-sys-border-radius-5);
+        font-size: var(--mlt-sys-font-size-2);
+        font-family: var(--register-font-family-text);
+        margin-bottom: var(--mlt-sys-padding-9);
+    }
+
+    &__field {
+        display: flex;
+        flex-direction: column;
+        gap: var(--mlt-sys-padding-4);
+    }
+
+    &__label {
+        font-size: var(--mlt-sys-font-size-2);
+        font-weight: 600;
+        color: var(--register-label-color);
+        font-family: var(--register-font-family-text);
+    }
+
+    &__input {
+        --input-padding: var(--mlt-sys-padding-7) var(--mlt-sys-padding-7);
+        --input-border-radius: var(--mlt-sys-border-radius-5);
+        --input-font-size: var(--mlt-sys-font-size-3);
+        --input-border-width: 2px;
+
+        padding: var(--input-padding);
+        border: var(--input-border-width) solid var(--register-input-border-color);
+        border-radius: var(--input-border-radius);
+        font-size: var(--input-font-size);
+        font-family: var(--register-font-family-text);
+        transition: all 0.2s ease;
+        background-color: var(--register-input-background);
+
+        &:focus {
+            outline: none;
+            border-color: var(--register-input-border-color-focus);
+            background-color: white;
+            box-shadow: 0 0 0 3px rgba(134, 189, 189, 0.2);
+        }
+
+        &:hover:not(:focus):not(:disabled) {
+            border-color: var(--mlt-sys-color-white-3);
+        }
+
+        &:disabled {
+            background-color: var(--register-input-background);
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        &::placeholder {
+            color: var(--register-input-placeholder-color);
+        }
+    }
+
+    &__actions {
+        margin-top: var(--mlt-sys-margin-7);
+    }
+
+    &__button {
+        width: 100%;
+        padding: var(--mlt-sys-padding-7);
+        background: linear-gradient(135deg, var(--mlt-sys-color-alternative-4) 0%, var(--mlt-sys-color-alternative-5) 100%);
+        color: var(--mlt-sys-color-white-1);
+        border: none;
+        border-radius: var(--mlt-sys-border-radius-5);
+        font-size: var(--mlt-sys-font-size-3);
+        font-weight: 600;
+        font-family: var(--register-font-family-text);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--mlt-sys-padding-4);
+
+        &:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(134, 189, 189, 0.4);
+        }
+
+        &:active:not(:disabled) {
+            transform: translateY(0);
+        }
+
+        &:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        &--loading {
+            background: linear-gradient(135deg, var(--mlt-sys-color-alternative-5) 0%, var(--mlt-sys-color-alternative-6) 100%);
+        }
+    }
+
+    &__button-spinner {
+        width: 16px;
+        height: 16px;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-top-color: white;
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+    }
+
+    &__footer {
+        margin-top: var(--mlt-sys-margin-8);
+        text-align: center;
+
+        p {
+            margin: 0;
+            font-size: var(--mlt-sys-font-size-3);
+            color: var(--register-subtitle-color);
+            font-family: var(--register-font-family-text);
+        }
+    }
+
+    &__link {
+        color: var(--mlt-sys-color-alternative-5);
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.2s;
+
+        &:hover {
+            color: var(--mlt-sys-color-alternative-4);
+            text-decoration: underline;
+        }
+    }
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}

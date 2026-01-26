@@ -1,0 +1,113 @@
+  $colores: (
+      'primary': (#86BDBD, #92C4C4, #9ECACA, #AAD1D1, #B6D7D7, #C3DEDE, #CFE5E5, #DBEBEB, #E7F2F2, #F3F8F8),
+      'alternative': (#86BDBD, #6DA3A3, #538A8A, #3A7171, #205757, #073E3E, #002424, #000B0B, #000000, #063D3D),
+      'white': (#E9E8E2, #CFCEC8, #B6B5AF, #9C9B95, #83827C, #6A6963, #504F49, #373630, #1D1C16, #040300),
+      'button-primary': (#D02222, #D53838, #D94E4E, #DE6464, #E37A7A, #E79090, #ECA7A7, #F1BDBD, #F6D3D3, #FAE9E9),
+      'button-secundary': (#80E6C0, #67CCA6, #4DB38D, #349974, #1A805A, #016741, #004D27, #00340E, #001A00, #000100)
+  );
+  $typography: (
+      'font-family-text': ('Zalando Sans', sans-serif),
+      'font-family-title': ('STIX Two Text', sans-serif)
+  );
+  $font-size: (
+      12px,
+      14px,
+      16px,
+      18px,
+      20px,
+      24px,
+      30px,
+      36px,
+      48px,
+      64px
+  );
+  $border-radius: (
+      0px,
+      2px,
+      4px,
+      6px,
+      8px,
+      12px,
+      16px
+  );
+
+  $margin: (
+      0px,
+      4px,
+      6px,
+      8px,
+      10px,
+      12px,
+      16px,
+      20px,
+      24px,
+      32px,
+      40px,
+      48px,
+      64px,
+      80px,
+      96px,
+      128px,
+      160px,
+      192px,
+      224px,
+      256px,
+      320px,
+      480px,
+      640px
+  );
+  $padding: (
+      0px,
+      4px,
+      6px,
+      8px,
+      10px,
+      12px,
+      16px,
+      20px,
+      24px,
+      32px,
+      40px,
+      48px,
+      64px,
+      80px,
+      96px,
+      128px,
+      160px,
+      192px,
+      224px,
+      256px,
+      320px,
+      480px,
+      640px
+  );
+
+  $width: (
+      16px,
+      20px,
+      24px,
+      30px,
+      40px,
+      50px,
+      80px,
+      100px,
+      120px,
+      320px,
+      420px,
+      480px,
+      640px,
+      800px,
+      960px,
+      1200px
+  );
+  $height: (
+      16px,
+      20px,
+      24px,
+      30px,
+      40px,
+      50px,
+      80px,
+      100px,
+      120px
+  );

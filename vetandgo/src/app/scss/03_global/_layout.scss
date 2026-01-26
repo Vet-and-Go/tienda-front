@@ -1,0 +1,14 @@
+@use "sass:list";
+@use '../01_utilities/variables' as utilities;
+
+:root {
+  @for $i from 1 through length(utilities.$width) {
+    $w: list.nth(utilities.$width, $i);
+    --mlt-sys-width-#{$i}: #{$w};
+  }
+
+  @for $i from 1 through length(utilities.$height) {
+    $h: list.nth(utilities.$height, $i);
+    --mlt-sys-height-#{$i}: #{$h};
+  }
+}

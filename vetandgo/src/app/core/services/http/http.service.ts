@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -8,11 +8,9 @@ export class Http {
 
   constructor(private http: HttpClient) { }
 
-  getAll<T>(route: string): Observable<T[]> {
-    return this.http.get<T[]>(`${this.baseUrl}/${route}`);
+  getAll<T>(route: string, params?: HttpParams): Observable<T[]> {
+    return this.http.get<T[]>(`${this.baseUrl}/${route}`, { params });
   }
-
-
 
   getById<T>(route: string): Observable<T> {
     return this.http.get<T>(`${this.baseUrl}/${route}`);

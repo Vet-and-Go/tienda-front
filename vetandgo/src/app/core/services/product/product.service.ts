@@ -29,7 +29,6 @@ export class ProductService {
             params = params.set('search', keyword);
         }
 
-
         return this.httpClient.get<Page<Product>>('/api/products', { params });
     }
 

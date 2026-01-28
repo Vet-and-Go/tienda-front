@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class Http {
-  private readonly baseUrl: string = 'http://vetandgo-bank-back.preproducciondaw.cip.fpmislata.com/api';
+  private readonly baseUrl: string = '/api';
 
   constructor(private http: HttpClient) { }
 

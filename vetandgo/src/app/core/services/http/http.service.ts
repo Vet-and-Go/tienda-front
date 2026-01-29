@@ -1,15 +1,20 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class Http {
-  private readonly baseUrl: string = 'http://vetandgo-store-back.preproducciondaw.cip.fpmislata.com/api';
+  private readonly baseUrl: string = environment.apiUrl;
 
   constructor(private http: HttpClient) { }
 
   getAll<T>(route: string, params?: HttpParams): Observable<T[]> {
     return this.http.get<T[]>(`${this.baseUrl}/${route}`, { params });
+  }
+
+  getWithParams<T>(route: string, params: HttpParams): Observable<T> {
+    return this.http.get<T>(`${this.baseUrl}/${route}`, { params });
   }
 
   getById<T>(route: string): Observable<T> {

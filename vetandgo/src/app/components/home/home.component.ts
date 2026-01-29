@@ -57,20 +57,26 @@ export class HomeComponent implements OnInit {
 
     loadData(): void {
         this.isLoading = true;
+        console.log('🏠 Cargando datos del home...');
 
         // Load categories
-        this.productService.getCategories().subscribe(cats => {
-            this.categories = cats.slice(0, 4); // Show only top 4 on home
+        this.productService.getCategories().subscribe({
+            next: cats => {
+                console.log('✅ Categorías cargadas:', cats);
+                this.categories = cats.slice(0, 4); // Show only top 4 on home
+            },
+            error: err => console.error('❌ Error categorías:', err)
         });
 
         // Load some "featured" products (e.g., first page, sorted by stock or just default)
         this.productService.getProducts(1, 4).subscribe({
             next: (page) => {
+                console.log('✅ Productos cargados:', page);
                 this.featuredProducts = page.data;
                 this.isLoading = false;
             },
             error: (err) => {
-                console.error('Error loading home data', err);
+                console.error('❌ Error loading home data', err);
                 this.isLoading = false;
             }
         });

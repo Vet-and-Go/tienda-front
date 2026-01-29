@@ -3,8 +3,8 @@
     --products-font-family: var(--mlt-sys-font-family-text);
     --products-sidebar-bg: var(--mlt-sys-color-white-1);
     --products-sidebar-radius: var(--mlt-sys-border-radius-6);
-    --products-sidebar-title-color: var(--mlt-sys-color-alternative-10);
-    --products-item-color: var(--mlt-sys-color-alternative-9);
+    --products-sidebar-title-color: #2d3748;
+    --products-item-color: #718096;
     --products-item-active-color: var(--mlt-sys-color-alternative-5);
 
     --products-card-bg: var(--mlt-sys-color-white-1);
@@ -18,7 +18,7 @@
 
     font-family: var(--products-font-family);
     min-height: 100vh;
-    background: linear-gradient(180deg, var(--mlt-sys-color-white-2) 0%, var(--mlt-sys-color-white-1) 100%);
+    background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
 
     /* Hero Section */
     &__hero {
@@ -332,8 +332,8 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 
             &--discount {
-                background: linear-gradient(135deg, var(--mlt-sys-color-button-primary-1), var(--mlt-sys-color-button-secundary-1));
-                color: var(--mlt-sys-color-white-1);
+                background: linear-gradient(135deg, #f56565, #ed8936);
+                color: white;
                 animation: pulse 2s infinite;
             }
         }
@@ -353,7 +353,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, var(--mlt-sys-color-white-2) 0%, var(--mlt-sys-color-white-1) 100%);
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
             padding: 1.5rem;
             position: relative;
             overflow: hidden;
@@ -418,7 +418,7 @@
 
             &-old {
                 font-size: 0.75rem;
-                color: var(--mlt-sys-color-white-4);
+                color: var(--mlt-sys-color-button-primary-1);
                 text-decoration: line-through;
                 font-weight: 500;
             }
@@ -433,7 +433,7 @@
             &-value {
                 font-size: 1.1rem;
                 font-weight: 800;
-                color: var(--mlt-sys-color-alternative-10);
+                color: var(--mlt-sys-color-alternative-5);
                 line-height: 1;
             }
         }

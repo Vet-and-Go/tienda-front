@@ -89,8 +89,8 @@
         display: inline-flex;
         align-items: center;
         gap: 0.5rem;
-        background: linear-gradient(135deg, var(--mlt-sys-color-button-primary-1), var(--mlt-sys-color-button-secundary-1));
-        color: var(--mlt-sys-color-white-1);
+        background: linear-gradient(135deg, #f56565, #ed8936);
+        color: white;
         padding: 0.75rem 1.5rem;
         border-radius: 50px;
         font-size: 1.1rem;
@@ -122,14 +122,14 @@
         &-original {
             font-size: 1rem;
             font-weight: 500;
-            color: var(--mlt-sys-color-white-4);
+            color: var(--mlt-sys-color-button-primary-1);
             text-decoration: line-through;
         }
 
         &-final {
             font-size: 1.75rem;
             font-weight: 800;
-            color: var(--mlt-sys-color-button-primary-1);
+            color: var(--mlt-sys-color-alternative-5);
             line-height: 1;
         }
     }

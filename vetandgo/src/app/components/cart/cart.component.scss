@@ -1,13 +1,13 @@
 
 .cart {
     --cart-background: var(--mlt-sys-color-white-2);
-    --cart-title-color: var(--mlt-sys-color-alternative-10);
+    --cart-title-color: #2d3748;
 
     --cart-item-background: var(--mlt-sys-color-white-1);
     --cart-item-border: 1px solid var(--mlt-sys-color-white-3);
     --cart-item-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
     --cart-item-radius: var(--mlt-sys-border-radius-6);
-    --cart-item-title-color: var(--mlt-sys-color-alternative-10);
+    --cart-item-title-color: #2d3748;
     --cart-item-price-color: var(--mlt-sys-color-alternative-5);
     --cart-item-image-bg: var(--mlt-sys-color-white-2);
 
@@ -118,7 +118,7 @@
 
         &-price-old {
             font-size: 0.85rem;
-            color: var(--mlt-sys-color-white-4);
+            color: var(--mlt-sys-color-button-primary-1);
             text-decoration: line-through;
             font-weight: 500;
         }
@@ -131,8 +131,8 @@
         }
 
         &-discount-badge {
-            background: linear-gradient(135deg, var(--mlt-sys-color-button-primary-1), var(--mlt-sys-color-button-primary-2));
-            color: var(--mlt-sys-color-white-1);
+            background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+            color: white;
             padding: 0.25rem 0.6rem;
             border-radius: 20px;
             font-size: 0.7rem;
@@ -166,7 +166,7 @@
         justify-content: center;
         cursor: pointer;
         transition: all 0.3s ease;
-        color: var(--mlt-sys-color-alternative-10);
+        color: #2d3748;
         font-weight: 700;
         font-size: 1.1rem;
 
@@ -281,7 +281,7 @@
 
     &__clear-btn {
         background: transparent;
-        color: var(--mlt-sys-color-white-4);
+        color: #718096;
         border: none;
         cursor: pointer;
         font-weight: 600;
@@ -299,7 +299,7 @@
 
         &-text {
             font-size: var(--mlt-sys-font-size-5);
-            color: var(--mlt-sys-color-white-4);
+            color: #718096;
             margin-bottom: 2rem;
         }
     }

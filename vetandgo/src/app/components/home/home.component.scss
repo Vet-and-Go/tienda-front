@@ -1,34 +1,30 @@
 
 .home {
-    --home-bg: linear-gradient(135deg, #f5f7fa 0%, #e8f0f8 100%);
+    --home-bg: linear-gradient(135deg, var(--mlt-sys-color-white-2) 0%, var(--mlt-sys-color-white-3) 100%);
     --home-text-color: var(--mlt-sys-color-alternative-5);
     --home-font-family: var(--mlt-sys-font-family-text);
 
-    // Hero variables
-    --home-hero-gradient-start: #667eea;
-    --home-hero-gradient-end: #764ba2;
+    --home-hero-gradient-start: var(--mlt-sys-color-primary-5);
+    --home-hero-gradient-end: var(--mlt-sys-color-primary-7);
     --home-hero-text-color: var(--mlt-sys-color-white-1);
     --home-hero-shadow: 0 20px 60px rgba(102, 126, 234, 0.4);
     --home-hero-cta-bg: var(--mlt-sys-color-white-1);
-    --home-hero-cta-color: #667eea;
+    --home-hero-cta-color: var(--mlt-sys-color-primary-5);
 
-    // Section title
-    --home-section-title-color: #2d3748;
+    --home-section-title-color: var(--mlt-sys-color-alternative-10);
 
-    // Cards
     --home-card-bg: var(--mlt-sys-color-white-1);
     --home-card-border: 1px solid rgba(0, 0, 0, 0.06);
     --home-card-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     --home-card-radius: 20px;
     --home-card-hover-shadow: 0 20px 40px rgba(102, 126, 234, 0.2);
-    --home-card-icon-color: #667eea;
+    --home-card-icon-color: var(--mlt-sys-color-primary-5);
 
-    // Product cards specific
-    --home-prod-image-bg: #f8fafc;
-    --home-prod-title-color: #2d3748;
-    --home-prod-price-color: #667eea;
-    --home-prod-btn-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    --home-prod-btn-color: white;
+    --home-prod-image-bg: var(--mlt-sys-color-white-2);
+    --home-prod-title-color: var(--mlt-sys-color-alternative-10);
+    --home-prod-price-color: var(--mlt-sys-color-primary-5);
+    --home-prod-btn-bg: linear-gradient(135deg, var(--mlt-sys-color-primary-5) 0%, var(--mlt-sys-color-primary-7) 100%);
+    --home-prod-btn-color: var(--mlt-sys-color-white-1);
 
     min-height: 100vh;
     background: var(--home-bg);
@@ -267,25 +263,25 @@
             width: 70px;
             height: 70px;
             margin: 0 auto 1.5rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, var(--mlt-sys-color-primary-5) 0%, var(--mlt-sys-color-primary-7) 100%);
             border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 2rem;
-            color: white;
+            color: var(--mlt-sys-color-white-1);
             box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
         }
 
         &-title {
             font-size: 1.3rem;
             font-weight: 700;
-            color: #2d3748;
+            color: var(--mlt-sys-color-alternative-10);
             margin-bottom: 0.5rem;
         }
 
         &-text {
-            color: #718096;
+            color: var(--mlt-sys-color-white-4);
             font-size: 1rem;
             line-height: 1.6;
         }
@@ -311,7 +307,7 @@
         &-line {
             flex: 1;
             height: 3px;
-            background: linear-gradient(90deg, transparent, #667eea, transparent);
+            background: linear-gradient(90deg, transparent, var(--mlt-sys-color-primary-5), transparent);
             border-radius: 2px;
             max-width: 150px;
         }
@@ -343,7 +339,7 @@
             left: 0;
             right: 0;
             height: 5px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
+            background: linear-gradient(90deg, var(--mlt-sys-color-primary-5), var(--mlt-sys-color-primary-7));
             transform: scaleX(0);
             transition: transform 0.4s;
         }
@@ -351,7 +347,7 @@
         &:hover {
             transform: translateY(-10px) scale(1.02);
             box-shadow: 0 20px 50px rgba(102, 126, 234, 0.25);
-            border-color: #667eea;
+            border-color: var(--mlt-sys-color-primary-5);
 
             &::before {
                 transform: scaleX(1);
@@ -371,7 +367,7 @@
             width: 200px;
             height: 200px;
             margin: 0 auto 1.5rem;
-            background: linear-gradient(135deg, #667eea15, #764ba215);
+            background: linear-gradient(135deg, rgba(var(--mlt-sys-color-primary-5-rgb, 102, 126, 234), 0.08), rgba(var(--mlt-sys-color-primary-7-rgb, 118, 75, 162), 0.08));
             border-radius: 20px;
             display: flex;
             align-items: center;
@@ -406,7 +402,7 @@
             transition: all 0.4s;
 
             i {
-                color: #667eea;
+                color: var(--mlt-sys-color-primary-5);
                 font-size: 1.2rem;
             }
         }
@@ -452,7 +448,7 @@
             align-items: center;
             justify-content: center;
             position: relative;
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            background: linear-gradient(135deg, var(--mlt-sys-color-white-2) 0%, var(--mlt-sys-color-white-3) 100%);
             overflow: hidden;
             padding: 1.5rem;
 
@@ -504,14 +500,14 @@
             &-original {
                 font-size: 0.75rem;
                 font-weight: 500;
-                color: #999;
+                color: var(--mlt-sys-color-white-4);
                 text-decoration: line-through;
             }
 
             &-value {
                 font-size: 1.1rem;
                 font-weight: 800;
-                color: #e74c3c;
+                color: var(--mlt-sys-color-button-primary-1);
                 line-height: 1;
             }
         }
@@ -521,8 +517,8 @@
         position: absolute;
         top: 1rem;
         right: 1rem;
-        background: linear-gradient(135deg, #667eea, #764ba2);
-        color: white;
+        background: linear-gradient(135deg, var(--mlt-sys-color-primary-5), var(--mlt-sys-color-primary-7));
+        color: var(--mlt-sys-color-white-1);
         padding: 0.4rem 1rem;
         border-radius: 50px;
         font-size: 0.85rem;
@@ -532,7 +528,7 @@
         transition: transform 0.3s;
 
         &--discount {
-            background: linear-gradient(135deg, #f56565, #ed8936);
+            background: linear-gradient(135deg, var(--mlt-sys-color-button-primary-1), var(--mlt-sys-color-button-secundary-1));
             box-shadow: 0 4px 15px rgba(245, 101, 101, 0.4);
             font-size: 1rem;
             animation: pulse 2s infinite;
@@ -590,7 +586,7 @@
         text-align: center;
         padding: 4rem 2rem;
         font-size: 1.2rem;
-        color: #718096;
+        color: var(--mlt-sys-color-white-4);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -598,7 +594,7 @@
 
         i {
             font-size: 2rem;
-            color: #667eea;
+            color: var(--mlt-sys-color-primary-5);
         }
     }
 
@@ -606,11 +602,11 @@
         grid-column: 1 / -1;
         text-align: center;
         padding: 4rem 2rem;
-        color: #718096;
+        color: var(--mlt-sys-color-white-4);
 
         i {
             font-size: 4rem;
-            color: #cbd5e0;
+            color: var(--mlt-sys-color-white-3);
             margin-bottom: 1rem;
             display: block;
         }

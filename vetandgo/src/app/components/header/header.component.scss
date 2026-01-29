@@ -5,17 +5,14 @@
     --header-text-color: var(--mlt-sys-color-alternative-5);
     --header-hover-color: var(--mlt-sys-color-primary-3);
 
-    // Search
     --header-search-bg: rgba(255, 255, 255, 0.5);
     --header-search-border: 1px solid rgba(0, 0, 0, 0.1);
     --header-search-focus-bg: var(--mlt-sys-color-white-1);
 
-    // Cart Icon
     --header-cart-bg: rgba(0, 0, 0, 0.04);
     --header-cart-hover-bg: rgba(var(--mlt-sys-color-primary-3-rgb), 0.1);
     --header-cart-badge-bg: var(--mlt-sys-color-primary-3);
 
-    // Auth btns
     --header-btn-register-bg: var(--mlt-sys-color-primary-3);
     --header-btn-register-color: var(--mlt-sys-color-white-1);
 
@@ -143,8 +140,8 @@
             position: absolute;
             top: -8px;
             right: -8px;
-            background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
-            color: white;
+            background: linear-gradient(135deg, var(--mlt-sys-color-button-primary-1), var(--mlt-sys-color-button-primary-2));
+            color: var(--mlt-sys-color-white-1);
             font-size: 0.75rem;
             font-weight: 900;
             width: 24px;

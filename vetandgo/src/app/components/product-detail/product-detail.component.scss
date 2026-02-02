@@ -3,26 +3,21 @@
     --pd-bg: var(--mlt-sys-color-white-2);
     --pd-font-family: var(--mlt-sys-font-family-text);
 
-    // Gallery
     --pd-gallery-bg: var(--mlt-sys-color-white-1);
     --pd-gallery-border: 1px solid var(--mlt-sys-color-white-3);
     --pd-gallery-radius: var(--mlt-sys-border-radius-8);
     --pd-gallery-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
 
-    // Info
     --pd-title-color: var(--mlt-sys-color-neutral-dark-1);
     --pd-price-color: var(--mlt-sys-color-alternative-5);
     --pd-desc-color: var(--mlt-sys-color-neutral-dark-2);
 
-    // Tags
     --pd-cat-bg: var(--mlt-sys-color-white-2);
     --pd-cat-color: var(--mlt-sys-color-alternative-5);
 
-    // Stock
     --pd-stock-ok-color: var(--mlt-sys-color-feedback-success);
     --pd-stock-bad-color: var(--mlt-sys-color-feedback-error);
 
-    // Button
     --pd-btn-bg: var(--mlt-sys-color-alternative-5);
     --pd-btn-color: var(--mlt-sys-color-white-1);
     --pd-btn-radius: var(--mlt-sys-border-radius-6);
@@ -120,27 +115,27 @@
 
     &__price {
         display: flex;
-        align-items: baseline;
+        align-items: center;
         gap: 0.75rem;
         flex-wrap: wrap;
 
         &-original {
             font-size: 1rem;
             font-weight: 500;
-            color: #999;
+            color: var(--mlt-sys-color-button-primary-1);
             text-decoration: line-through;
         }
 
         &-final {
             font-size: 1.75rem;
             font-weight: 800;
-            color: #e74c3c;
+            color: var(--mlt-sys-color-alternative-5);
             line-height: 1;
         }
     }
 
     &__savings {
-        color: #27ae60;
+        color: var(--mlt-sys-color-button-secundary-5);
         font-size: 0.9rem;
         font-weight: 600;
         display: flex;

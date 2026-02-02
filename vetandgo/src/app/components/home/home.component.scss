@@ -4,7 +4,6 @@
     --home-text-color: var(--mlt-sys-color-alternative-5);
     --home-font-family: var(--mlt-sys-font-family-text);
 
-    // Hero variables
     --home-hero-gradient-start: #667eea;
     --home-hero-gradient-end: #764ba2;
     --home-hero-text-color: var(--mlt-sys-color-white-1);
@@ -12,10 +11,8 @@
     --home-hero-cta-bg: var(--mlt-sys-color-white-1);
     --home-hero-cta-color: #667eea;
 
-    // Section title
     --home-section-title-color: #2d3748;
 
-    // Cards
     --home-card-bg: var(--mlt-sys-color-white-1);
     --home-card-border: 1px solid rgba(0, 0, 0, 0.06);
     --home-card-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
@@ -23,7 +20,6 @@
     --home-card-hover-shadow: 0 20px 40px rgba(102, 126, 234, 0.2);
     --home-card-icon-color: #667eea;
 
-    // Product cards specific
     --home-prod-image-bg: #f8fafc;
     --home-prod-title-color: #2d3748;
     --home-prod-price-color: #667eea;
@@ -496,7 +492,7 @@
 
         &-price {
             display: flex;
-            align-items: baseline;
+            align-items: center;
             gap: 0.5rem;
             margin-top: auto;
             flex-wrap: wrap;
@@ -504,14 +500,14 @@
             &-original {
                 font-size: 0.75rem;
                 font-weight: 500;
-                color: #999;
+                color: var(--mlt-sys-color-button-primary-1);
                 text-decoration: line-through;
             }
 
             &-value {
                 font-size: 1.1rem;
                 font-weight: 800;
-                color: #e74c3c;
+                color: var(--mlt-sys-color-alternative-5);
                 line-height: 1;
             }
         }

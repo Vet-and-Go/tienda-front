@@ -12,7 +12,9 @@
                             [alt]="item.product.name">
                     </div>
                     <div class="cart__item-details">
-                        <h3 class="cart__item-name">{{ item.product.name }}</h3>
+                        <h3 class="cart__item-name">
+                            <a [routerLink]="['/products', item.product.id]">{{ item.product.name }}</a>
+                        </h3>
                         @if (item.product.discountPercentage > 0) {
                         <div class="cart__item-price-container">
                             <span class="cart__item-price-old">{{ item.product.basePrice | currency:'EUR' }}</span>
@@ -23,11 +25,10 @@
                         <p class="cart__item-price">{{ item.product.finalPrice | currency:'EUR' }}</p>
                         }
                         <div class="cart__item-quantity">
-                            <button (click)="decreaseQuantity(item.product.id)" class="cart__qty-btn">-</button>
+                            <button (click)="decreaseQuantity(item.product.id)" class="cart__qty-btn cart__qty-btn--minus">-</button>
                             <span class="cart__qty-num">{{ item.quantity }}</span>
-                            <button (click)="increaseQuantity(item.product.id)" class="cart__qty-btn">+</button>
+                            <button (click)="increaseQuantity(item.product.id)" class="cart__qty-btn cart__qty-btn--plus">+</button>
                         </div>
-                        <p class="cart__item-subtotal">Subtotal: {{ item.product.finalPrice * item.quantity | currency:'EUR' }}</p>
                     </div>
                     <button class="cart__remove-btn" (click)="removeItem(item.product.id)" title="Eliminar">
                         <i class="fas fa-trash-alt"></i>

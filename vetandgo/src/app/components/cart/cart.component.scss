@@ -1,29 +1,24 @@
 
 .cart {
-    // Variable mappings matching the design system pattern
-    --cart-background: var(--mlt-sys-color-white-2); // Or transparent if it's a page
-    --cart-title-color: var(--mlt-sys-color-neutral-dark-1);
+    --cart-background: var(--mlt-sys-color-white-2);
+    --cart-title-color: #2d3748;
 
-    // Item card variables
     --cart-item-background: var(--mlt-sys-color-white-1);
     --cart-item-border: 1px solid var(--mlt-sys-color-white-3);
     --cart-item-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
     --cart-item-radius: var(--mlt-sys-border-radius-6);
-    --cart-item-title-color: var(--mlt-sys-color-neutral-dark-1);
+    --cart-item-title-color: #2d3748;
     --cart-item-price-color: var(--mlt-sys-color-alternative-5);
     --cart-item-image-bg: var(--mlt-sys-color-white-2);
 
-    // Summary card variables
     --cart-summary-background: var(--mlt-sys-color-white-1);
     --cart-summary-radius: var(--mlt-sys-border-radius-7);
     --cart-summary-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
 
-    // Button variables
     --cart-btn-background: var(--mlt-sys-color-alternative-5);
     --cart-btn-color: var(--mlt-sys-color-white-1);
     --cart-btn-radius: var(--mlt-sys-border-radius-5);
 
-    // Font variables
     --cart-font-family: var(--mlt-sys-font-family-text);
 
     width: 100%;
@@ -100,41 +95,54 @@
             font-weight: 700;
             color: var(--cart-item-title-color);
             margin: 0;
+
+            a {
+                color: var(--cart-item-title-color);
+                text-decoration: none;
+                transition: all 0.3s ease;
+                display: inline-block;
+
+                &:hover {
+                    color: var(--mlt-sys-color-alternative-5);
+                    transform: translateX(4px);
+                }
+            }
         }
 
         &-price-container {
             display: flex;
-            align-items: baseline;
-            gap: 0.6rem;
+            align-items: center;
+            gap: 0.8rem;
             flex-wrap: wrap;
         }
 
         &-price-old {
-            font-size: 0.8rem;
-            color: #999;
+            font-size: 0.85rem;
+            color: var(--mlt-sys-color-button-primary-1);
             text-decoration: line-through;
             font-weight: 500;
         }
 
         &-price {
-            font-size: 1rem;
-            color: #e74c3c;
-            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--mlt-sys-color-alternative-5);
+            font-weight: 800;
             margin: 0;
         }
 
         &-discount-badge {
-            background-color: #e74c3c;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
             color: white;
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
+            padding: 0.25rem 0.6rem;
+            border-radius: 20px;
             font-size: 0.7rem;
-            font-weight: bold;
+            font-weight: 800;
+            box-shadow: 0 2px 8px rgba(255, 107, 107, 0.3);
         }
 
         &-subtotal {
-            font-size: 0.85rem;
-            color: #27ae60;
+            font-size: 0.9rem;
+            color: var(--mlt-sys-color-alternative-5);
             font-weight: 700;
             margin: 0.5rem 0 0 0;
         }
@@ -148,22 +156,46 @@
     }
 
     &__qty-btn {
-        width: 32px;
-        height: 32px;
-        border-radius: var(--mlt-sys-border-radius-3);
-        border: 1px solid var(--mlt-sys-color-white-4);
+        width: 36px;
+        height: 36px;
+        border-radius: var(--mlt-sys-border-radius-4);
+        border: 2px solid var(--mlt-sys-color-white-4);
         background: var(--mlt-sys-color-white-1);
         display: flex;
         align-items: center;
         justify-content: center;
         cursor: pointer;
-        transition: all 0.2s;
-        color: var(--mlt-sys-color-neutral-dark-1);
+        transition: all 0.3s ease;
+        color: #2d3748;
+        font-weight: 700;
+        font-size: 1.1rem;
 
-        &:hover {
-            border-color: var(--mlt-sys-color-alternative-5);
-            color: var(--mlt-sys-color-alternative-5);
-            background: var(--mlt-sys-color-white-2);
+        &--minus {
+            &:hover {
+                border-color: var(--mlt-sys-color-alternative-5);
+                color: var(--mlt-sys-color-alternative-5);
+                background: var(--mlt-sys-color-white-2);
+                transform: scale(1.05);
+            }
+        }
+
+        &--plus {
+            border: 2px solid var(--mlt-sys-color-alternative-5);
+            background: linear-gradient(135deg, var(--mlt-sys-color-alternative-5), var(--mlt-sys-color-alternative-4));
+            color: white;
+            font-weight: 900;
+            font-size: 1.3rem;
+            box-shadow: 0 4px 12px rgba(var(--mlt-sys-color-alternative-5-rgb, 74, 207, 207), 0.4);
+
+            &:hover {
+                transform: scale(1.15);
+                box-shadow: 0 6px 20px rgba(var(--mlt-sys-color-alternative-5-rgb, 74, 207, 207), 0.7);
+                background: linear-gradient(135deg, var(--mlt-sys-color-alternative-4), var(--mlt-sys-color-alternative-5));
+            }
+
+            &:active {
+                transform: scale(0.95);
+            }
         }
     }
 
@@ -183,7 +215,7 @@
         transition: all 0.2s;
 
         &:hover {
-            color: var(--mlt-sys-color-button-primary-1); // Error/Red color likely
+            color: var(--mlt-sys-color-button-primary-1);
             transform: scale(1.1);
         }
 
@@ -249,7 +281,7 @@
 
     &__clear-btn {
         background: transparent;
-        color: var(--mlt-sys-color-white-5);
+        color: #718096;
         border: none;
         cursor: pointer;
         font-weight: 600;
@@ -267,7 +299,7 @@
 
         &-text {
             font-size: var(--mlt-sys-font-size-5);
-            color: var(--mlt-sys-color-white-5);
+            color: #718096;
             margin-bottom: 2rem;
         }
     }

@@ -3,8 +3,8 @@
     --products-font-family: var(--mlt-sys-font-family-text);
     --products-sidebar-bg: var(--mlt-sys-color-white-1);
     --products-sidebar-radius: var(--mlt-sys-border-radius-6);
-    --products-sidebar-title-color: var(--mlt-sys-color-neutral-dark-1);
-    --products-item-color: var(--mlt-sys-color-neutral-dark-2);
+    --products-sidebar-title-color: #2d3748;
+    --products-item-color: #718096;
     --products-item-active-color: var(--mlt-sys-color-alternative-5);
 
     --products-card-bg: var(--mlt-sys-color-white-1);
@@ -411,39 +411,35 @@
 
         &-price {
             display: flex;
-            align-items: baseline;
+            align-items: center;
             gap: 0.5rem;
             margin-top: auto;
             flex-wrap: wrap;
 
-            // Precio antiguo tachado (cuando hay descuento)
             &-old {
                 font-size: 0.75rem;
-                color: #999;
+                color: var(--mlt-sys-color-button-primary-1);
                 text-decoration: line-through;
                 font-weight: 500;
             }
 
-            // Precio nuevo con descuento (destacado)
             &-new {
                 font-size: 1.1rem;
                 font-weight: 800;
-                color: #e74c3c;
+                color: var(--mlt-sys-color-alternative-5);
                 line-height: 1;
             }
 
-            // Precio regular (sin descuento)
             &-value {
                 font-size: 1.1rem;
                 font-weight: 800;
-                color: #2c3e50;
+                color: var(--mlt-sys-color-alternative-5);
                 line-height: 1;
             }
         }
 
-        // Texto de ahorro
         &-savings {
-            color: #27ae60;
+            color: var(--mlt-sys-color-button-secundary-5);
             font-size: 0.7rem;
             font-weight: 600;
             margin-top: 0.25rem;

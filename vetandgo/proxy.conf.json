@@ -1,6 +1,6 @@
 {
     "/api": {
-      "target": "http://vetandgo-store-back.preproducciondaw.cip.fpmislata.com",
+      "target": "http://localhost:8082",
       "secure": false,
       "changeOrigin": true
     }

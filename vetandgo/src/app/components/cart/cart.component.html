@@ -43,8 +43,28 @@
                     <span class="cart__summary-label">Total:</span>
                     <span class="cart__summary-price">{{ totalPrice | currency:'EUR' }}</span>
                 </div>
-                <button class="cart__checkout-btn">Finalizar Compra</button>
-                <button class="cart__clear-btn" (click)="clearCart()">Vaciar Carrito</button>
+                
+                @if (orderSuccess) {
+                <div class="cart__success-message">
+                    <i class="fas fa-check-circle"></i>
+                    ¡Pedido creado con éxito!
+                </div>
+                }
+                
+                @if (orderError) {
+                <div class="cart__error-message">
+                    <i class="fas fa-exclamation-circle"></i>
+                    {{ orderError }}
+                </div>
+                }
+                
+                <button 
+                    class="cart__checkout-btn" 
+                    (click)="checkout()" 
+                    [disabled]="isProcessingOrder">
+                    {{ isProcessingOrder ? 'Procesando...' : 'Finalizar Compra' }}
+                </button>
+                <button class="cart__clear-btn" (click)="clearCart()" [disabled]="isProcessingOrder">Vaciar Carrito</button>
             </div>
         </div>
         } @else {

@@ -272,10 +272,15 @@
         transition: all 0.3s;
         font-size: var(--mlt-sys-font-size-3);
 
-        &:hover {
+        &:hover:not(:disabled) {
             opacity: 0.9;
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        &:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
         }
     }
 
@@ -287,9 +292,46 @@
         font-weight: 600;
         font-size: var(--mlt-sys-font-size-2);
 
-        &:hover {
+        &:hover:not(:disabled) {
             color: var(--mlt-sys-color-button-primary-1);
             text-decoration: underline;
+        }
+
+        &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    }
+
+    &__success-message {
+        background: linear-gradient(135deg, #48bb78, #38a169);
+        color: white;
+        padding: var(--mlt-sys-padding-5);
+        border-radius: var(--mlt-sys-border-radius-4);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 600;
+        box-shadow: 0 4px 12px rgba(72, 187, 120, 0.3);
+
+        i {
+            font-size: 1.2rem;
+        }
+    }
+
+    &__error-message {
+        background: linear-gradient(135deg, #f56565, #e53e3e);
+        color: white;
+        padding: var(--mlt-sys-padding-5);
+        border-radius: var(--mlt-sys-border-radius-4);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 600;
+        box-shadow: 0 4px 12px rgba(245, 101, 101, 0.3);
+
+        i {
+            font-size: 1.2rem;
         }
     }
 

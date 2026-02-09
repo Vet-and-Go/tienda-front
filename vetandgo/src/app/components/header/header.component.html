@@ -5,7 +5,9 @@
         <a routerLink="/home">Inicio</a>
         <a routerLink="/products">Productos</a>
 
-        
+        @if (currentUser) {
+        <a routerLink="/orders">Mis Pedidos</a>
+        }
 
         @if (currentUser) {
         <div style="display: flex; gap: 1rem; align-items: center;">

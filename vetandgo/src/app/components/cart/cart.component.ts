@@ -52,7 +52,9 @@ export class CartComponent implements OnInit {
     }
 
     checkout(): void {
+        console.log('=== CHECKOUT BUTTON CLICKED ===');
         const user = this.authService.getUser();
+        console.log('[CHECKOUT] Retrieved user:', user);
         
         if (!user) {
             console.error('[CHECKOUT] User not authenticated');

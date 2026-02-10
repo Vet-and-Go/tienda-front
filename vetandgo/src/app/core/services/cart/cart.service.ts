@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Product } from '../../../models/product.models';
 
-interface CartItem {
+export interface CartItem {
     product: Product;
     quantity: number;
 }
@@ -94,5 +94,9 @@ export class CartService {
         this.cartItems.next([]);
         this.totalItems.next(0);
         localStorage.removeItem('vetandgo_cart');
+    }
+
+    getCartItems(): CartItem[] {
+        return this.cartItems.value;
     }
 }

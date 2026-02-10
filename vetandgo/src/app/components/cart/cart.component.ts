@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
-import { CartService } from '../../core/services/cart/cart.service';
+import { CartService, CartItem } from '../../core/services/cart/cart.service';
 import { OrderService } from '../../core/services/order/order.service';
 import { AuthService } from '../../core/services/auth/auth.service';
 import { OrderRequest, OrderState } from '../../models/order.models';
@@ -15,7 +15,7 @@ import { OrderRequest, OrderState } from '../../models/order.models';
     styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit {
-    cartItems$: Observable<any[]>;
+    cartItems$: Observable<CartItem[]>;
     totalPrice = 0;
     isProcessingOrder = false;
     orderSuccess = false;
@@ -59,7 +59,7 @@ export class CartComponent implements OnInit {
             return;
         }
 
-        const cartItems = this.cartService.cartItems$.value;
+        const cartItems = this.cartService.getCartItems();
         if (cartItems.length === 0) {
             this.orderError = 'El carrito está vacío';
             return;
@@ -70,7 +70,7 @@ export class CartComponent implements OnInit {
         this.orderSuccess = false;
 
         const orderRequest: OrderRequest = {
-            items: cartItems.map(item => ({
+            items: cartItems.map((item: CartItem) => ({
                 productId: item.product.id,
                 quantity: item.quantity
             })),

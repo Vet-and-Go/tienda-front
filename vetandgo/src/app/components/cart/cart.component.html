@@ -8,7 +8,7 @@
                 @for (item of (cartItems$ | async); track item.product.id) {
                 <div class="cart__item">
                     <div class="cart__item-image">
-                        <img [src]="item.product.imageUrl || item.product.image || 'assets/placeholder-product.png'"
+                        <img [src]="item.product.imageUrl || 'assets/placeholder-product.png'"
                             [alt]="item.product.name">
                     </div>
                     <div class="cart__item-details">

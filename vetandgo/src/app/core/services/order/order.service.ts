@@ -27,7 +27,10 @@ export class OrderService {
         return this.http.get<OrderResponse[]>(this.apiUrl);
     }
 
-    getOrdersByUser(userId: number): Observable<OrderResponse[]> {
+    getOrdersByUser(userId: number | undefined): Observable<OrderResponse[]> {
+        if (userId === undefined) {
+            throw new Error('User ID is required');
+        }
         const params = new HttpParams().set('userId', userId.toString());
         return this.http.get<OrderResponse[]>(this.apiUrl, { params });
     }

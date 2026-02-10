@@ -86,7 +86,7 @@ export class CartComponent implements OnInit {
         };
 
         console.log('[CHECKOUT] Order request payload:', JSON.stringify(orderRequest, null, 2));
-        console.log('[CHECKOUT] Sending to API: POST /api/orders?userId=' + user.id);
+        console.log('[CHECKOUT] Sending to API: POST /api/orders' + (user.id ? '?userId=' + user.id : ' (no userId param, using token)'));
 
         this.orderService.createOrder(user.id, orderRequest).subscribe({
             next: (order) => {

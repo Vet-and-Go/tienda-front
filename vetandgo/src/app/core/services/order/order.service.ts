@@ -13,6 +13,10 @@ export class OrderService {
 
     createOrder(userId: number, orderRequest: OrderRequest): Observable<OrderResponse> {
         const params = new HttpParams().set('userId', userId.toString());
+        console.log('[ORDER_SERVICE] createOrder called');
+        console.log('[ORDER_SERVICE] URL:', this.apiUrl);
+        console.log('[ORDER_SERVICE] Params:', params.toString());
+        console.log('[ORDER_SERVICE] Request body:', orderRequest);
         return this.http.post<OrderResponse>(this.apiUrl, orderRequest, { params });
     }
 

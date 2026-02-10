@@ -55,15 +55,21 @@ export class CartComponent implements OnInit {
         const user = this.authService.getUser();
         
         if (!user) {
+            console.error('[CHECKOUT] User not authenticated');
             this.orderError = 'Debes iniciar sesión para finalizar la compra';
             return;
         }
 
         const cartItems = this.cartService.getCartItems();
         if (cartItems.length === 0) {
+            console.warn('[CHECKOUT] Cart is empty');
             this.orderError = 'El carrito está vacío';
             return;
         }
+
+        console.log('[CHECKOUT] Starting checkout process');
+        console.log('[CHECKOUT] User:', { id: user.id, username: user.username });
+        console.log('[CHECKOUT] Cart items:', cartItems);
 
         this.isProcessingOrder = true;
         this.orderError = null;
@@ -77,14 +83,23 @@ export class CartComponent implements OnInit {
             state: OrderState.PENDING
         };
 
+        console.log('[CHECKOUT] Order request payload:', JSON.stringify(orderRequest, null, 2));
+        console.log('[CHECKOUT] Sending to API: POST /api/orders?userId=' + user.id);
+
         this.orderService.createOrder(user.id, orderRequest).subscribe({
             next: (order) => {
+                console.log('[CHECKOUT] Order created successfully!');
+                console.log('[CHECKOUT] Order response:', order);
                 this.orderSuccess = true;
                 this.isProcessingOrder = false;
                 this.cartService.clearCart();
                 setTimeout(() => this.orderSuccess = false, 5000);
             },
             error: (error) => {
+                console.error('[CHECKOUT] Order creation failed');
+                console.error('[CHECKOUT] Error details:', error);
+                console.error('[CHECKOUT] Error status:', error.status);
+                console.error('[CHECKOUT] Error message:', error.error?.message || error.message);
                 this.isProcessingOrder = false;
                 this.orderError = error.error?.message || 'Error al crear la orden. Por favor, intenta de nuevo.';
             }

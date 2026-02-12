@@ -46,7 +46,15 @@ export class Orders implements OnInit {
         this.isLoading = false;
       },
       error: (error) => {
-        this.error = error.error?.message || 'Error al cargar los pedidos';
+        if (error.status === 0) {
+          this.error = 'No se pudo conectar con el servidor. Verifica tu conexión a internet.';
+        } else if (error.status === 404) {
+          this.error = 'No se encontraron pedidos para este usuario.';
+        } else if (error.status === 401 || error.status === 403) {
+          this.error = 'No tienes permiso para ver estos pedidos. Inicia sesión nuevamente.';
+        } else {
+          this.error = error.error?.message || 'Error al cargar tus pedidos. Inténtalo de nuevo más tarde.';
+        }
         this.isLoading = false;
       }
     });
@@ -87,7 +95,49 @@ export class Orders implements OnInit {
         }
       },
       error: (error) => {
-        this.error = error.error?.message || 'Error al cambiar el estado del pedido';
+        if (error.status === 404) {
+          this.error = 'Pedido no encontrado. Recarga la página e inténtalo de nuevo.';
+        } else if (error.status === 403) {
+          this.error = 'No tienes permiso para modificar este pedido.';
+        } else {
+          this.error = error.error?.message || 'Error al actualizar el estado del pedido. Inténtalo de nuevo.';
+        }
+      }
+    });
+  }
+
+  confirmDelivery(orderId: number): void {
+    const password = prompt('Para confirmar la recepción del pedido, ingresa tu contraseña:');
+    
+    if (password === null) {
+      // Usuario canceló
+      return;
+    }
+    
+    if (!password || password.trim().length === 0) {
+      alert('Debes ingresar tu contraseña para confirmar la recepción.');
+      return;
+    }
+    
+    if (password.length < 4) {
+      alert('Contraseña inválida. Debe tener al menos 4 caracteres.');
+      return;
+    }
+    
+    // Verificar contraseña con el backend haciendo login temporal
+    const user = this.authService.getUser();
+    if (!user) {
+      this.error = 'Sesión expirada. Por favor, inicia sesión nuevamente.';
+      return;
+    }
+    
+    this.authService.login({ username: user.username, password: password }).subscribe({
+      next: () => {
+        // Contraseña correcta, cambiar estado del pedido
+        this.changeOrderState(orderId, OrderState.DELIVERED);
+      },
+      error: () => {
+        alert('Contraseña incorrecta. No se pudo confirmar la recepción del pedido.');
       }
     });
   }

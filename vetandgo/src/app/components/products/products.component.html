@@ -1,4 +1,10 @@
 <div class="products">
+    @if (showNotification) {
+    <div class="products__notification">
+        <i class="fas fa-check-circle"></i>
+        <span>¡Producto añadido al carrito!</span>
+    </div>
+    }
     <div class="products__hero">
         <div class="products__hero-content">
             <h1 class="products__hero-title">Nuestros Productos</h1>
@@ -95,6 +101,10 @@
                             Ahorras: {{ product.basePrice - product.finalPrice | currency:'EUR' }}
                         </div>
                         }
+                        <button class="products__card-btn" (click)="addToCart($event, product)">
+                            <i class="fas fa-shopping-cart"></i>
+                            Añadir al carrito
+                        </button>
                     </div>
                 </div>
                 }

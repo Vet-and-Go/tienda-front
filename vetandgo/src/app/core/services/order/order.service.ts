@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { OrderRequest, OrderResponse, OrderState } from '../../../models/order.models';
+import { OrderRequest, OrderResponse, OrderState, CheckoutRequest, CheckoutResponse } from '../../../models/order.models';
 import { Http } from '../http/http.service';
 import { HttpParams } from '@angular/common/http';
 
@@ -43,5 +43,14 @@ export class OrderService {
 
   deleteOrder(orderId: number): Observable<void> {
     return this.http.deleteById<void>(`orders/${orderId}`);
+  }
+
+  checkout(userId: number, checkoutRequest: CheckoutRequest): Observable<CheckoutResponse> {
+    const params = new HttpParams().set('userId', userId.toString());
+    console.log('[ORDER_SERVICE] checkout called');
+    console.log('[ORDER_SERVICE] URL: orders/checkout');
+    console.log('[ORDER_SERVICE] Params:', params.toString());
+    console.log('[ORDER_SERVICE] Request body:', checkoutRequest);
+    return this.http.createWithParams<CheckoutResponse>('orders/checkout', checkoutRequest, params);
   }
 }

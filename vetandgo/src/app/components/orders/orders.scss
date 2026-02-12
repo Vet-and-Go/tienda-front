@@ -205,6 +205,50 @@
         align-items: center;
     }
 
+    &__delivery-btn {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1.5rem;
+        background: linear-gradient(135deg, #48bb78, #38a169);
+        color: white;
+        border: none;
+        border-radius: var(--mlt-sys-border-radius-4);
+        font-size: var(--mlt-sys-font-size-3);
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+
+        i {
+            font-size: var(--mlt-sys-font-size-4);
+        }
+
+        &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(72, 187, 120, 0.4);
+        }
+
+        &:active {
+            transform: translateY(0);
+        }
+    }
+
+    &__delivered-message {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1.5rem;
+        background: rgba(72, 187, 120, 0.1);
+        color: #38a169;
+        border-radius: var(--mlt-sys-border-radius-4);
+        font-size: var(--mlt-sys-font-size-3);
+        font-weight: 600;
+
+        i {
+            font-size: var(--mlt-sys-font-size-4);
+        }
+    }
+
     &__footer-right {
         display: flex;
         align-items: center;

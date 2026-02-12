@@ -118,7 +118,6 @@
         transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         text-decoration: none;
         box-shadow: 0 4px 15px rgba(var(--mlt-sys-color-alternative-5-rgb, 74, 207, 207), 0.4);
-        animation: cartPulse 2s ease-in-out infinite;
 
         &-icon {
             font-size: 1.4rem;
@@ -127,13 +126,8 @@
 
         &:hover {
             background: linear-gradient(135deg, var(--mlt-sys-color-alternative-4), var(--mlt-sys-color-alternative-5));
-            transform: translateY(-3px) scale(1.05);
+            transform: translateY(-3px);
             box-shadow: 0 8px 25px rgba(var(--mlt-sys-color-alternative-5-rgb, 74, 207, 207), 0.6);
-
-            .header__cart-count {
-                transform: scale(1.3) rotate(15deg);
-                animation: bounce 0.5s ease;
-            }
         }
 
         &-count {
@@ -153,36 +147,10 @@
             box-shadow: 0 4px 12px rgba(255, 107, 107, 0.5);
             border: 3px solid white;
             transition: all 0.3s ease;
-            animation: pulse 1.5s ease-in-out infinite;
         }
     }
 
-    @keyframes cartPulse {
-        0%, 100% {
-            box-shadow: 0 4px 15px rgba(var(--mlt-sys-color-alternative-5-rgb, 74, 207, 207), 0.4);
-        }
-        50% {
-            box-shadow: 0 4px 20px rgba(var(--mlt-sys-color-alternative-5-rgb, 74, 207, 207), 0.7);
-        }
-    }
 
-    @keyframes pulse {
-        0%, 100% {
-            transform: scale(1);
-        }
-        50% {
-            transform: scale(1.1);
-        }
-    }
-
-    @keyframes bounce {
-        0%, 100% {
-            transform: scale(1) rotate(0deg);
-        }
-        50% {
-            transform: scale(1.3) rotate(15deg);
-        }
-    }
 
     &__auth-btn {
         padding: 0.5rem 1.2rem;

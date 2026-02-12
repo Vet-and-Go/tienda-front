@@ -1,9 +1,10 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { ProductService } from '../../core/services/product/product.service';
 import { CartService } from '../../core/services/cart/cart.service';
-import { Product, Page } from '../../models/product.models';
+import { Product, Page, Category } from '../../models/product.models';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 @Component({
@@ -13,9 +14,9 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
     templateUrl: './products.component.html',
     styleUrls: ['./products.component.scss']
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent implements OnInit, OnDestroy {
     products: Product[] = [];
-    categories: any[] = [];
+    categories: Category[] = [];
     selectedCategoryId: number | null = null;
     currentPage = 1;
     pageSize = 20;
@@ -25,6 +26,10 @@ export class ProductsComponent implements OnInit {
     searchKeyword = '';
 
     isLoading = false;
+    showNotification = false;
+    
+    private subscriptions: Subscription[] = [];
+    private timeoutId?: number;
 
     constructor(
         private productService: ProductService,
@@ -36,11 +41,10 @@ export class ProductsComponent implements OnInit {
     ngOnInit(): void {
         this.calculatePageSize();
         
-        // Load categories from backend
-        this.productService.getCategories().subscribe(cats => this.categories = cats);
+        const catSub = this.productService.getCategories().subscribe(cats => this.categories = cats);
+        this.subscriptions.push(catSub);
 
-        // Subscribe to query params to handle navigation/filtering
-        this.route.queryParams.subscribe(params => {
+        const paramsSub = this.route.queryParams.subscribe(params => {
             this.currentPage = params['page'] ? Number(params['page']) : 1;
             this.selectedCategoryId = params['categoryId'] ? Number(params['categoryId']) : null;
             this.currentSort = params['sort'] || '';
@@ -49,6 +53,14 @@ export class ProductsComponent implements OnInit {
 
             this.loadProducts();
         });
+        this.subscriptions.push(paramsSub);
+    }
+
+    ngOnDestroy(): void {
+        this.subscriptions.forEach(sub => sub.unsubscribe());
+        if (this.timeoutId) {
+            clearTimeout(this.timeoutId);
+        }
     }
 
     @HostListener('window:resize')
@@ -57,17 +69,25 @@ export class ProductsComponent implements OnInit {
     }
 
     calculatePageSize(): void {
-        // Fixed 4 columns per row
+        
         const columns = 4;
         
-        // Set pageSize to a multiple of columns (4 rows)
+        
         const rows = 4;
-        this.pageSize = columns * rows; // 16 products per page
+        this.pageSize = columns * rows; 
     }
 
     addToCart(event: Event, product: Product): void {
         event.stopPropagation();
         this.cartService.addToCart(product);
+        
+        this.showNotification = true;
+        if (this.timeoutId) {
+            clearTimeout(this.timeoutId);
+        }
+        this.timeoutId = window.setTimeout(() => {
+            this.showNotification = false;
+        }, 3000);
     }
 
     
@@ -105,11 +125,18 @@ export class ProductsComponent implements OnInit {
         ).subscribe({
             next: (page: Page<Product>) => {
                 this.products = page.data;
-                this.totalElements = page.totalElements; // totalElements might be needed for pagination logic
+                this.totalElements = page.totalElements; 
                 this.isLoading = false;
             },
             error: (err) => {
                 console.error('Error loading products', err);
+                if (err.status === 0) {
+                    console.error('\u274c No se pudo conectar con el servidor. Verifica tu conexi\u00f3n.');
+                } else if (err.status === 500) {
+                    console.error('\u274c Error en el servidor al cargar productos.');
+                } else {
+                    console.error('\u274c Error al cargar productos:', err.message);
+                }
                 this.isLoading = false;
             }
         });
@@ -117,9 +144,7 @@ export class ProductsComponent implements OnInit {
 
     onCategorySelect(categoryId: number | null): void {
         this.selectedCategoryId = categoryId;
-        this.currentPage = 1; // Reset to first page on filter change
-        // Clear search when selecting a category to avoid backend total page count issues
-        // and to treat category selection as a reset of the main product view context.
+        this.currentPage = 1; 
         this.currentKeyword = '';
         this.updateUrl();
     }
@@ -178,7 +203,6 @@ export class ProductsComponent implements OnInit {
     }
 
     onSearchInput(): void {
-        // Optional: implement debounce for live search
         if (!this.searchKeyword.trim()) {
             this.clearSearch();
         }

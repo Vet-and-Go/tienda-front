@@ -37,3 +37,20 @@ export enum OrderState {
     PROCESSED = 'PROCESSED',
     DELIVERED = 'DELIVERED'
 }
+
+export interface CheckoutRequest {
+    items: OrderItemRequest[];
+    cardNumber: string;
+    expirationDate: string;
+    cvc: string;
+    fullName: string;
+    login: string;
+    apiToken: string;
+    concept: string;
+}
+
+export interface CheckoutResponse {
+    order: OrderResponse | null;
+    paymentStatus: 'SUCCESS' | 'FAILED';
+    message: string;
+}

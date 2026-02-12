@@ -3,5 +3,13 @@
     "target": "http://localhost:8082",
     "secure": false,
     "changeOrigin": true
+  },
+  "/api-remote": {
+    "target": "http://vetandgo-store-back.preproducciondaw.cip.fpmislata.com",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/api-remote": "/api"
+    }
   }
 }

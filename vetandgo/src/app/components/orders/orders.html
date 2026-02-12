@@ -60,18 +60,20 @@
 
                 <div class="orders__footer">
                     <div class="orders__footer-left">
-                        @if (getAvailableStates(order.state).length > 0) {
-                        <div class="orders__state-change">
-                            <label class="orders__state-label">Cambiar estado:</label>
-                            <select 
-                                class="orders__state-select" 
-                                (change)="changeOrderState(order.id, $any($event.target).value)">
-                                <option value="">Seleccionar...</option>
-                                @for (state of getAvailableStates(order.state); track state) {
-                                <option [value]="state">{{ getStateLabel(state) }}</option>
-                                }
-                            </select>
-                        </div>
+                        @if (order.state === OrderState.PROCESSED) {
+                        <button 
+                            class="orders__delivery-btn" 
+                            (click)="confirmDelivery(order.id)"
+                            title="Confirmar que has recibido el pedido">
+                            <i class="fas fa-check-circle"></i>
+                            ¿Te ha llegado el producto?
+                        </button>
+                        }
+                        @if (order.state === OrderState.DELIVERED) {
+                        <span class="orders__delivered-message">
+                            <i class="fas fa-check-double"></i>
+                            Pedido recibido
+                        </span>
                         }
                     </div>
                     <div class="orders__footer-right">

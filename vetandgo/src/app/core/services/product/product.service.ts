@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Http } from '../http/http.service';
-import { Page, Product } from '../../../models/product.models';
+import { Page, Product, Category } from '../../../models/product.models';
 import { HttpParams } from '@angular/common/http';
 
 @Injectable({
@@ -31,7 +31,7 @@ export class ProductService {
         return this.http.getWithParams<Page<Product>>('products', params);
     }
 
-    getCategories(): Observable<any[]> {
+    getCategories(): Observable<Category[]> {
         return this.http.getAll<any>('categories');
     }
 

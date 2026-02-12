@@ -47,7 +47,7 @@
                 @if (orderSuccess) {
                 <div class="cart__success-message">
                     <i class="fas fa-check-circle"></i>
-                    ¡Pedido creado con éxito!
+                    ¡Pago procesado con éxito!
                 </div>
                 }
                 
@@ -57,14 +57,85 @@
                     {{ orderError }}
                 </div>
                 }
-                
+
+                @if (!showPaymentForm) {
                 <button 
                     class="cart__checkout-btn" 
-                    (click)="checkout()" 
+                    (click)="initiateCheckout()" 
                     [disabled]="isProcessingOrder">
-                    {{ isProcessingOrder ? 'Procesando...' : 'Finalizar Compra' }}
+                    Proceder al Pago
                 </button>
-                <button class="cart__clear-btn" (click)="clearCart()" [disabled]="isProcessingOrder">Vaciar Carrito</button>
+                } @else {
+                <div class="cart__payment-form">
+                    <h3 class="cart__payment-title">Datos de Pago</h3>
+                    
+                    <div class="cart__form-group">
+                        <label for="cardNumber">Número de Tarjeta</label>
+                        <input 
+                            type="text" 
+                            id="cardNumber" 
+                            [(ngModel)]="paymentData.cardNumber" 
+                            placeholder="1234567812345678"
+                            maxlength="16"
+                            pattern="[0-9]*"
+                            class="cart__input"
+                            [disabled]="isProcessingOrder">
+                    </div>
+
+                    <div class="cart__form-row">
+                        <div class="cart__form-group">
+                            <label for="expirationDate">Fecha Exp. (MM/YY)</label>
+                            <input 
+                                type="text" 
+                                id="expirationDate" 
+                                [(ngModel)]="paymentData.expirationDate" 
+                                placeholder="12/26"
+                                maxlength="5"
+                                class="cart__input"
+                                [disabled]="isProcessingOrder">
+                        </div>
+
+                        <div class="cart__form-group">
+                            <label for="cvc">CVC</label>
+                            <input 
+                                type="text" 
+                                id="cvc" 
+                                [(ngModel)]="paymentData.cvc" 
+                                placeholder="123"
+                                maxlength="4"
+                                pattern="[0-9]*"
+                                class="cart__input"
+                                [disabled]="isProcessingOrder">
+                        </div>
+                    </div>
+
+                    <div class="cart__form-group">
+                        <label for="fullName">Nombre del Titular</label>
+                        <input 
+                            type="text" 
+                            id="fullName" 
+                            [(ngModel)]="paymentData.fullName" 
+                            placeholder="Juan Pérez"
+                            class="cart__input"
+                            [disabled]="isProcessingOrder">
+                    </div>
+
+                    <div class="cart__payment-actions">
+                        <button 
+                            class="cart__pay-btn" 
+                            (click)="processPayment()" 
+                            [disabled]="isProcessingOrder">
+                            {{ isProcessingOrder ? 'Procesando...' : 'Pagar ' + (totalPrice | currency:'EUR') }}
+                        </button>
+                        <button 
+                            class="cart__cancel-btn" 
+                            (click)="cancelPayment()" 
+                            [disabled]="isProcessingOrder">
+                            Cancelar
+                        </button>
+                    </div>
+                </div>
+                }
             </div>
         </div>
         } @else {

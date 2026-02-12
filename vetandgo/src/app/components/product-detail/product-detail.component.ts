@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { ProductService } from '../../core/services/product/product.service';
 import { CartService } from '../../core/services/cart/cart.service';
 import { Product } from '../../models/product.models';
@@ -12,11 +13,13 @@ import { Product } from '../../models/product.models';
     templateUrl: './product-detail.component.html',
     styleUrls: ['./product-detail.component.scss']
 })
-export class ProductDetailComponent implements OnInit {
+export class ProductDetailComponent implements OnInit, OnDestroy {
     product: Product | null = null;
     isLoading = true;
     error: string | null = null;
     isAdded = false;
+    private subscription?: Subscription;
+    private timeoutId?: number;
 
     constructor(
         private route: ActivatedRoute,
@@ -25,7 +28,7 @@ export class ProductDetailComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.route.paramMap.subscribe(params => {
+        this.subscription = this.route.paramMap.subscribe(params => {
             const id = params.get('id');
             if (id) {
                 this.loadProduct(Number(id));
@@ -34,6 +37,13 @@ export class ProductDetailComponent implements OnInit {
                 this.isLoading = false;
             }
         });
+    }
+
+    ngOnDestroy(): void {
+        this.subscription?.unsubscribe();
+        if (this.timeoutId) {
+            clearTimeout(this.timeoutId);
+        }
     }
 
     loadProduct(id: number): void {
@@ -45,7 +55,15 @@ export class ProductDetailComponent implements OnInit {
             },
             error: (err) => {
                 console.error('Error loading product', err);
-                this.error = 'No se pudo cargar el producto. Puede que no exista o haya un problema de conexión.';
+                if (err.status === 404) {
+                    this.error = 'Producto no encontrado. Puede que haya sido eliminado o el ID sea incorrecto.';
+                } else if (err.status === 0) {
+                    this.error = 'No se pudo conectar con el servidor. Verifica tu conexión a internet.';
+                } else if (err.status === 500) {
+                    this.error = 'Error en el servidor al cargar el producto. Inténtalo de nuevo más tarde.';
+                } else {
+                    this.error = 'No se pudo cargar el producto. Por favor, inténtalo de nuevo.';
+                }
                 this.isLoading = false;
             }
         });
@@ -54,11 +72,13 @@ export class ProductDetailComponent implements OnInit {
         if (this.product) {
             this.cartService.addToCart(this.product);
             this.isAdded = true;
-            setTimeout(() => this.isAdded = false, 2000);
+            if (this.timeoutId) {
+                clearTimeout(this.timeoutId);
+            }
+            this.timeoutId = window.setTimeout(() => this.isAdded = false, 2000);
         }
     }
 
-    // Ya no es necesario calcular el precio final, viene del backend
     hasDiscount(): boolean {
         return this.product?.discountPercentage ? this.product.discountPercentage > 0 : false;
     }

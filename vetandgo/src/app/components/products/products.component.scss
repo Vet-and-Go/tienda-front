@@ -334,16 +334,6 @@
             &--discount {
                 background: linear-gradient(135deg, #f56565, #ed8936);
                 color: white;
-                animation: pulse 2s infinite;
-            }
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05);
             }
         }
 
@@ -378,11 +368,6 @@
                 max-width: 100%;
                 max-height: 100%;
                 object-fit: contain;
-                transition: transform 0.3s ease;
-            }
-
-            &:hover img {
-                transform: scale(1.05);
             }
         }
 
@@ -443,6 +428,83 @@
             font-size: 0.7rem;
             font-weight: 600;
             margin-top: 0.25rem;
+        }
+
+        &-btn {
+            width: 100%;
+            padding: 0.75rem 1.25rem;
+            background: linear-gradient(135deg, var(--mlt-sys-color-alternative-5), var(--mlt-sys-color-alternative-4));
+            color: white;
+            border: none;
+            border-radius: var(--mlt-sys-border-radius-4);
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: auto;
+            box-shadow: 0 4px 12px rgba(var(--mlt-sys-color-alternative-5-rgb, 74, 207, 207), 0.3);
+
+            i {
+                font-size: 1rem;
+            }
+
+            &:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 18px rgba(var(--mlt-sys-color-alternative-5-rgb, 74, 207, 207), 0.4);
+                background: linear-gradient(135deg, var(--mlt-sys-color-alternative-4), var(--mlt-sys-color-alternative-3));
+            }
+
+            &:active {
+                transform: translateY(0);
+            }
+        }
+    }
+
+    &__notification {
+        position: fixed;
+        top: 100px;
+        right: 2rem;
+        background: linear-gradient(135deg, #48bb78, #38a169);
+        color: white;
+        padding: 1rem 1.5rem;
+        border-radius: var(--mlt-sys-border-radius-5);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        z-index: 1000;
+        animation: slideInRight 0.3s ease, slideOutRight 0.3s ease 2.7s;
+        font-weight: 600;
+        font-size: 0.95rem;
+
+        i {
+            font-size: 1.25rem;
+        }
+    }
+
+    @keyframes slideInRight {
+        from {
+            transform: translateX(400px);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideOutRight {
+        from {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        to {
+            transform: translateX(400px);
+            opacity: 0;
         }
     }
 
@@ -567,14 +629,9 @@
     /* Animations */
     @keyframes checkIn {
         0% {
-            transform: scale(0);
             opacity: 0;
         }
-        50% {
-            transform: scale(1.2);
-        }
         100% {
-            transform: scale(1);
             opacity: 1;
         }
     }

@@ -26,7 +26,7 @@ export class CartService {
                 this.cartItems.next(items);
                 this.updateTotals(items);
             } catch (e) {
-                console.error('Error parsing cart from localeStorage', e);
+                console.error('Error parsing cart from localStorage', e);
             }
         }
     }

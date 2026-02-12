@@ -21,7 +21,12 @@ export class LoginComponent {
 
     onSubmit(): void {
         if (!this.username || !this.password) {
-            this.errorMessage = 'Please enter username and password';
+            this.errorMessage = 'Por favor, ingresa tu usuario y contraseña';
+            return;
+        }
+
+        if (this.username.trim().length < 3) {
+            this.errorMessage = 'El nombre de usuario debe tener al menos 3 caracteres';
             return;
         }
 
@@ -35,8 +40,16 @@ export class LoginComponent {
             },
             error: (err) => {
                 this.isLoading = false;
-                this.errorMessage = 'Invalid credentials';
-                console.error('Login failed', err);
+                
+                if (err.status === 401 || err.status === 403 || err.status === 404) {
+                    this.errorMessage = 'Usuario o contraseña incorrectos. Por favor, verifica tus datos.';
+                } else if (err.status === 0) {
+                    this.errorMessage = 'No se pudo conectar con el servidor. Verifica tu conexión a internet.';
+                } else if (err.status === 400) {
+                    this.errorMessage = 'Datos de inicio de sesión inválidos.';
+                } else {
+                    this.errorMessage = 'Error al iniciar sesión. Inténtalo de nuevo más tarde.';
+                }
             }
         });
     }

@@ -1,11 +1,11 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from '../../../../environments/environment.development';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class Http {
-  private readonly baseUrl: string = 'http://localhost:8082/api';
+  private readonly baseUrl: string = environment.apiUrl;
 
   constructor(private http: HttpClient) { }
 
@@ -25,8 +25,16 @@ export class Http {
     return this.http.post<T>(`${this.baseUrl}/${route}`, newObject);
   }
 
+  createWithParams<T>(route: string, newObject: T, params: HttpParams): Observable<T> {
+    return this.http.post<T>(`${this.baseUrl}/${route}`, newObject, { params });
+  }
+
   update<T>(route: string, newObject: T): Observable<T> {
     return this.http.put<T>(`${this.baseUrl}/${route}`, newObject);
+  }
+
+  patch<T>(route: string, data: any): Observable<T> {
+    return this.http.patch<T>(`${this.baseUrl}/${route}`, data);
   }
 
   deleteById<T>(route: string): Observable<T> {

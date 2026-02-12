@@ -11,11 +11,8 @@ export class OrderService {
 
     constructor(private http: HttpClient) {}
 
-    createOrder(userId: number | undefined, orderRequest: OrderRequest): Observable<OrderResponse> {
-        let params = new HttpParams();
-        if (userId !== undefined) {
-            params = params.set('userId', userId.toString());
-        }
+    createOrder(userId: number, orderRequest: OrderRequest): Observable<OrderResponse> {
+        const params = new HttpParams().set('userId', userId.toString());
         console.log('[ORDER_SERVICE] createOrder called');
         console.log('[ORDER_SERVICE] URL:', this.apiUrl);
         console.log('[ORDER_SERVICE] Params:', params.toString());
@@ -27,10 +24,7 @@ export class OrderService {
         return this.http.get<OrderResponse[]>(this.apiUrl);
     }
 
-    getOrdersByUser(userId: number | undefined): Observable<OrderResponse[]> {
-        if (userId === undefined) {
-            throw new Error('User ID is required');
-        }
+    getOrdersByUser(userId: number): Observable<OrderResponse[]> {
         const params = new HttpParams().set('userId', userId.toString());
         return this.http.get<OrderResponse[]>(this.apiUrl, { params });
     }

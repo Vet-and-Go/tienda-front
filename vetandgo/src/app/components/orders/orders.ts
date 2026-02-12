@@ -35,11 +35,6 @@ export class Orders implements OnInit {
       return;
     }
 
-    if (!user.id) {
-      this.error = 'Error: ID de usuario no disponible';
-      return;
-    }
-
     this.isLoading = true;
     this.error = null;
 

@@ -5,7 +5,7 @@ import { environment } from '../../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class Http {
-  private readonly baseUrl: string = 'http://localhost:8080/api';
+  private readonly baseUrl: string = 'http://localhost:8082/api';
 
   constructor(private http: HttpClient) { }
 

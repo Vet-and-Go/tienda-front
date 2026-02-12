@@ -59,8 +59,25 @@
                 </div>
 
                 <div class="orders__footer">
-                    <span class="orders__total-label">Total:</span>
-                    <span class="orders__total-amount">{{ order.totalAmount | currency:'EUR' }}</span>
+                    <div class="orders__footer-left">
+                        @if (getAvailableStates(order.state).length > 0) {
+                        <div class="orders__state-change">
+                            <label class="orders__state-label">Cambiar estado:</label>
+                            <select 
+                                class="orders__state-select" 
+                                (change)="changeOrderState(order.id, $any($event.target).value)">
+                                <option value="">Seleccionar...</option>
+                                @for (state of getAvailableStates(order.state); track state) {
+                                <option [value]="state">{{ getStateLabel(state) }}</option>
+                                }
+                            </select>
+                        </div>
+                        }
+                    </div>
+                    <div class="orders__footer-right">
+                        <span class="orders__total-label">Total:</span>
+                        <span class="orders__total-amount">{{ order.totalAmount | currency:'EUR' }}</span>
+                    </div>
                 </div>
             </div>
             }

@@ -77,4 +77,31 @@ export class Orders implements OnInit {
         return state;
     }
   }
+
+  changeOrderState(orderId: number, newState: OrderState): void {
+    this.orderService.changeOrderState(orderId, newState).subscribe({
+      next: (updatedOrder) => {
+        const orderIndex = this.orders.findIndex(o => o.id === orderId);
+        if (orderIndex !== -1) {
+          this.orders[orderIndex] = updatedOrder;
+        }
+      },
+      error: (error) => {
+        this.error = error.error?.message || 'Error al cambiar el estado del pedido';
+      }
+    });
+  }
+
+  getAvailableStates(currentState: OrderState): OrderState[] {
+    switch (currentState) {
+      case OrderState.PENDING:
+        return [OrderState.PROCESSED, OrderState.DELIVERED];
+      case OrderState.PROCESSED:
+        return [OrderState.DELIVERED];
+      case OrderState.DELIVERED:
+        return [];
+      default:
+        return [];
+    }
+  }
 }

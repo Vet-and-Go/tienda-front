@@ -21,15 +21,15 @@ export class Http {
     return this.http.get<T>(`${this.baseUrl}/${route}`);
   }
 
-  create<T>(route: string, newObject: T): Observable<T> {
+  create<T>(route: string, newObject: any): Observable<T> {
     return this.http.post<T>(`${this.baseUrl}/${route}`, newObject);
   }
 
-  createWithParams<T>(route: string, newObject: T, params: HttpParams): Observable<T> {
+  createWithParams<T>(route: string, newObject: any, params: HttpParams): Observable<T> {
     return this.http.post<T>(`${this.baseUrl}/${route}`, newObject, { params });
   }
 
-  update<T>(route: string, newObject: T): Observable<T> {
+  update<T>(route: string, newObject: any): Observable<T> {
     return this.http.put<T>(`${this.baseUrl}/${route}`, newObject);
   }
 

@@ -38,7 +38,7 @@ export class OrderService {
   }
 
   changeOrderState(orderId: number, state: OrderState): Observable<OrderResponse> {
-    return this.http.create<OrderResponse>(`orders/state`, { id: orderId, state });
+    return this.http.patch<OrderResponse>(`orders/${orderId}/state/${state}`, {});
   }
 
   deleteOrder(orderId: number): Observable<void> {
